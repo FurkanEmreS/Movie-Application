@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/black"
+    android:background="@color/white"
     tools:context=".MainFragment">
 
     <include layout="@layout/toolbar"/>
@@ -14,7 +14,7 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/black"
+        android:background="@color/white"
         android:fillViewport="true"
         android:layout_gravity="fill_vertical">
 
@@ -31,7 +31,8 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="6dp"
                 android:text="Popular Movies"
-                android:textColor="@color/white"
+                android:fontFamily="serif"
+                android:textColor="@color/black"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
@@ -48,7 +49,8 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="6dp"
                 android:text="Upcoming Movies"
-                android:textColor="@color/white"
+                android:fontFamily="serif"
+                android:textColor="@color/black"
                 android:textStyle="bold" />
 
             <androidx.recyclerview.widget.RecyclerView
@@ -64,7 +66,8 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="6dp"
                 android:text="Top Rated Movies"
-                android:textColor="@color/white"
+                android:fontFamily="serif"
+                android:textColor="@color/black"
                 android:textStyle="bold" />
 
             <androidx.recyclerview.widget.RecyclerView
@@ -80,7 +83,8 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="6dp"
                 android:text="Now Playing"
-                android:textColor="@color/white"
+                android:fontFamily="serif"
+                android:textColor="@color/black"
                 android:textStyle="bold" />
 
             <androidx.recyclerview.widget.RecyclerView

@@ -48,11 +48,13 @@ class MainActivity : AppCompatActivity() {
         }
     }
     fun addSeriesDetail(series: Series) {
-        val bundle = bundleOf("series" to series)
+        val bundle = Bundle().apply {
+            putParcelable("series", series)
+        }
         supportFragmentManager.commit {
             replace<SeriesDetailFragment>(R.id.fragmentContainerView, args = bundle)
             setReorderingAllowed(true)
-            addToBackStack("series_navigation_stack")
+            addToBackStack(null)
         }
     }
 

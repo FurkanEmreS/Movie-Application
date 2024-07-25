@@ -46,25 +46,13 @@ interface MovieApiInterface {
     @GET("/3/tv/airing_today?$API_KEY")
     fun getAiringTodaySeries(): Call<SeriesResponse>
 
-    @GET("/3/tv/{series_id}/similar$API_KEY")
+    @GET("/3/tv/{id}/similar?$API_KEY")
     fun getSeriesById(
         @Path("id") id: String
     ): Call<SeriesResponse>
 
-
-
-
-    @GET("/3/tv/{series_id}/credits?$API_KEY")
+    @GET("/3/tv/{id}/credits?$API_KEY")
     fun getSeriesCastById(
-        @Path("series_id") id: String
+        @Path("id") id: String
     ): Call<SeriesCastResponse>
-
-
-
-
-
-
-
-
-
 }

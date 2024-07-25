@@ -6,8 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/black"
-    tools:context=".MovieDetailFragment">
+    android:background="@color/white"
+    tools:context=".SeriesDetailFragment">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -42,8 +42,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:gravity="center"
-                android:text="Film Name"
-                android:textColor="@color/white"
+                android:text="Series Name"
+                android:textColor="@color/black"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -54,7 +54,7 @@
                 android:layout_marginTop="10dp"
                 android:gravity="center"
                 android:text="Release Date"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 android:textSize="12sp"
                 android:textStyle="bold" />
 
@@ -64,8 +64,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:gravity="center"
-                android:text="Average Text"
-                android:textColor="@color/white"
+                android:text="Vote Average"
+                android:textColor="@color/black"
                 android:textSize="12sp"
                 android:textStyle="bold" />
 
@@ -78,7 +78,7 @@
                 android:layout_marginRight="16dp"
                 android:gravity="center"
                 android:text="Overview"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 android:textSize="15sp" />
 
             <TextView
@@ -88,7 +88,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="16dp"
                 android:text="Cast"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 android:textStyle="bold" />
 
             <androidx.recyclerview.widget.RecyclerView
@@ -104,8 +104,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="16dp"
-                android:text="Similar Movies"
-                android:textColor="@color/white"
+                android:text="Similar Series"
+                android:textColor="@color/black"
                 android:textStyle="bold" />
 
             <androidx.recyclerview.widget.RecyclerView

@@ -62,22 +62,24 @@ class SeriesDetailFragment : Fragment(), SeriesAdapter.OnItemClickListener {
         }
     }
 
-    private fun fetchSimilarSeries(movieId: String, callback: (List<Series>) -> Unit) {
+    private fun fetchSimilarSeries(seriesId: String, callback: (List<Series>) -> Unit) {
         val apiService =
             MovieApiService.getInstance(requireContext()).create(MovieApiInterface::class.java)
-        apiService.getSeriesById(movieId).enqueue(object : Callback<SeriesResponse> {
+        apiService.getSeriesById(seriesId).enqueue(object : Callback<SeriesResponse> {
             override fun onResponse(call: Call<SeriesResponse>, response: Response<SeriesResponse>) {
                 callback(response.body()!!.series)
             }
 
-            override fun onFailure(call: Call<SeriesResponse>, t: Throwable) {}
+            override fun onFailure(call: Call<SeriesResponse>, t: Throwable) {
+                Log.e("SeriesDetailFragment", "Failed to fetch similar series", t)
+            }
         })
     }
 
-    private fun getCastData(castId: String, callback: (List<SeriesCast>) -> Unit) {
+    private fun getCastData(seriesId: String, callback: (List<SeriesCast>) -> Unit) {
         val apiService =
             MovieApiService.getInstance(requireContext()).create(MovieApiInterface::class.java)
-        apiService.getSeriesCastById(castId).enqueue(object : Callback<SeriesCastResponse> {
+        apiService.getSeriesCastById(seriesId).enqueue(object : Callback<SeriesCastResponse> {
             override fun onResponse(
                 call: Call<SeriesCastResponse>,
                 response: Response<SeriesCastResponse>
@@ -85,8 +87,9 @@ class SeriesDetailFragment : Fragment(), SeriesAdapter.OnItemClickListener {
                 callback(response.body()!!.seriesCasts)
             }
 
-            override fun onFailure(call: Call<SeriesCastResponse>, t: Throwable) {}
+            override fun onFailure(call: Call<SeriesCastResponse>, t: Throwable) {
+                Log.e("SeriesDetailFragment", "Failed to fetch series cast data", t)
+            }
         })
     }
-
 }
