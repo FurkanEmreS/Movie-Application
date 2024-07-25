@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/black"
-    tools:context=".MainFragment">
+    tools:context=".SeriesFragment">
 
     <include layout="@layout/toolbar"/>
 
@@ -24,67 +24,71 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/popularMovie"
+                android:id="@+id/popularSeries"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="6dp"
-                android:text="Popular Movies"
+                android:fontFamily="monospace"
+                android:text="Popular Series"
                 android:textColor="@color/white"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_popular_movies"
+                android:id="@+id/rv_popular_series"
                 android:layout_width="match_parent"
                 android:layout_height="136dp" />
 
             <TextView
-                android:id="@+id/textView6"
+                android:id="@+id/topRatedSeries"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="6dp"
-                android:text="Upcoming Movies"
+                android:fontFamily="monospace"
+                android:text="Top Rated Series"
                 android:textColor="@color/white"
                 android:textStyle="bold" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_upcoming_movies"
+                android:id="@+id/rv_top_rated_series"
                 android:layout_width="match_parent"
                 android:layout_height="136dp" />
 
             <TextView
-                android:id="@+id/topratedtextview"
+                android:id="@+id/onTheAirSeries"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="6dp"
-                android:text="Top Rated Movies"
+                android:fontFamily="monospace"
+                android:text="On The Air"
                 android:textColor="@color/white"
                 android:textStyle="bold" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_topRated_movies"
+                android:id="@+id/rv_on_the_air_series"
                 android:layout_width="match_parent"
                 android:layout_height="136dp" />
 
             <TextView
-                android:id="@+id/nowplayingmovieview"
+                android:id="@+id/airingTodaySeries"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="6dp"
-                android:text="Now Playing"
+                android:fontFamily="monospace"
+                android:text="Airing Today"
                 android:textColor="@color/white"
                 android:textStyle="bold" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_now_playing"
+                android:id="@+id/rv_airing_today_series"
                 android:layout_width="match_parent"
                 android:layout_height="136dp" />
         </LinearLayout>

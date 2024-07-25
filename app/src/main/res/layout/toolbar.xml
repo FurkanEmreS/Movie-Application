@@ -19,5 +19,15 @@
             android:textSize="30dp"
             android:textStyle="bold" />
 
+        <Button
+            android:id="@+id/seriesButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:backgroundTint="@color/white"
+            android:text="Series"
+            android:textColor="@color/black"
+            />
+
     </RelativeLayout>
 </RelativeLayout>

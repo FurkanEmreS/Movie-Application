@@ -20,11 +20,12 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun showMainList() {
+     fun showMainList() {
+         supportFragmentManager.popBackStack(null, androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE)
         supportFragmentManager.commit {
             setReorderingAllowed(true)
             add<MainFragment>(R.id.fragmentContainerView)
-            addToBackStack("movie_navigation_stack")
+            addToBackStack("null")
         }
     }
 
@@ -34,6 +35,15 @@ class MainActivity : AppCompatActivity() {
             replace<MovieDetailFragment>(R.id.fragmentContainerView, args = bundle)
             setReorderingAllowed(true)
             addToBackStack("movie_navigation_stack")
+        }
+    }
+
+    fun showSeriesList() {
+        supportFragmentManager.popBackStack(null, androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE)
+        supportFragmentManager.commit {
+            setReorderingAllowed(true)
+            replace<SeriesFragment>(R.id.fragmentContainerView)
+            addToBackStack("null")
         }
     }
 

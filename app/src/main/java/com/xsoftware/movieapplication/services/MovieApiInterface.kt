@@ -3,6 +3,7 @@ package com.xsoftware.movieapplication.services
 import com.xsoftware.movieapplication.APIConstants
 import com.xsoftware.movieapplication.models.MovieCastResponse
 import com.xsoftware.movieapplication.models.MovieResponse
+import com.xsoftware.movieapplication.models.SeriesResponse
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -31,4 +32,17 @@ interface MovieApiInterface {
     fun getCastById(
         @Path("id") id: String
     ): Call<MovieCastResponse>
+
+    @GET("/3/tv/popular?$API_KEY")
+    fun getPopularSeries(): Call<SeriesResponse>
+
+    @GET("/3/tv/top_rated?$API_KEY")
+    fun getTopRatedSeries(): Call<SeriesResponse>
+
+    @GET("/3/tv/on_the_air?$API_KEY")
+    fun getOnTheAirSeries(): Call<SeriesResponse>
+
+    @GET("/3/tv/airing_today?$API_KEY")
+    fun getAiringTodaySeries(): Call<SeriesResponse>
+
 }

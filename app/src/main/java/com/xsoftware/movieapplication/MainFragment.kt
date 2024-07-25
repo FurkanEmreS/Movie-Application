@@ -7,11 +7,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.xsoftware.movieapplication.databinding.FragmentMainBinding
 import com.xsoftware.movieapplication.models.Movie
 import com.xsoftware.movieapplication.models.MovieResponse
+import com.xsoftware.movieapplication.models.Series
 import com.xsoftware.movieapplication.services.MovieApiInterface
 import com.xsoftware.movieapplication.services.MovieApiService
 import retrofit2.Call
@@ -19,6 +21,8 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class MainFragment : Fragment(), MovieAdapter.OnItemClickListener {
+
+
 
     private lateinit var binding: FragmentMainBinding
 
@@ -36,7 +40,15 @@ class MainFragment : Fragment(), MovieAdapter.OnItemClickListener {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
         super.onViewCreated(view, savedInstanceState)
+        val seriesButton :Button = view.findViewById(R.id.seriesButton)
+
+        seriesButton.setOnClickListener{
+            (activity as? MainActivity)?.showSeriesList()
+
+        }
+
 
         binding.rvPopularMovies.layoutManager = LinearLayoutManager(view.context, RecyclerView.HORIZONTAL, false)
         binding.rvPopularMovies.setHasFixedSize(true)
