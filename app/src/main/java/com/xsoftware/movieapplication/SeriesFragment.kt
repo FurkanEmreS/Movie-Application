@@ -24,7 +24,7 @@ class SeriesFragment : Fragment(), SeriesAdapter.OnItemClickListener {
 
     override fun onItemClick(series: Series) {
         Log.d("SERIES", series.name ?: "-")
-        // Burada series detaylarını gösterebilirsiniz
+        (activity as? MainActivity)?.addSeriesDetail(series)
     }
 
     override fun onCreateView(

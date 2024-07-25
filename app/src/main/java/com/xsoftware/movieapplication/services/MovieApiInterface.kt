@@ -3,6 +3,7 @@ package com.xsoftware.movieapplication.services
 import com.xsoftware.movieapplication.APIConstants
 import com.xsoftware.movieapplication.models.MovieCastResponse
 import com.xsoftware.movieapplication.models.MovieResponse
+import com.xsoftware.movieapplication.models.SeriesCastResponse
 import com.xsoftware.movieapplication.models.SeriesResponse
 import retrofit2.Call
 import retrofit2.http.GET
@@ -44,5 +45,26 @@ interface MovieApiInterface {
 
     @GET("/3/tv/airing_today?$API_KEY")
     fun getAiringTodaySeries(): Call<SeriesResponse>
+
+    @GET("/3/tv/{series_id}/similar$API_KEY")
+    fun getSeriesById(
+        @Path("id") id: String
+    ): Call<SeriesResponse>
+
+
+
+
+    @GET("/3/tv/{series_id}/credits?$API_KEY")
+    fun getSeriesCastById(
+        @Path("series_id") id: String
+    ): Call<SeriesCastResponse>
+
+
+
+
+
+
+
+
 
 }

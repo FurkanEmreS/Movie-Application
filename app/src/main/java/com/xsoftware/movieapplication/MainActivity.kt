@@ -8,6 +8,7 @@ import androidx.fragment.app.add
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
 import com.xsoftware.movieapplication.models.Movie
+import com.xsoftware.movieapplication.models.Series
 
 class MainActivity : AppCompatActivity() {
 
@@ -44,6 +45,14 @@ class MainActivity : AppCompatActivity() {
             setReorderingAllowed(true)
             replace<SeriesFragment>(R.id.fragmentContainerView)
             addToBackStack("null")
+        }
+    }
+    fun addSeriesDetail(series: Series) {
+        val bundle = bundleOf("series" to series)
+        supportFragmentManager.commit {
+            replace<SeriesDetailFragment>(R.id.fragmentContainerView, args = bundle)
+            setReorderingAllowed(true)
+            addToBackStack("series_navigation_stack")
         }
     }
 
