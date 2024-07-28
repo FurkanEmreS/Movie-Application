@@ -22,7 +22,12 @@ data class Movie(
     val average: Double?,
 
     @SerializedName("overview")
-    val overview: String?
+    val overview: String?,
+
+
+
+
+
 ) : Parcelable {
     constructor() : this("", "", "", "", null, "")
 }

@@ -17,6 +17,8 @@ data class MovieCast(
 
     @SerializedName("profile_path")
     val profilePath: String?
+
+
 ) : Parcelable {
     constructor() : this("", "", "", "")
 }

@@ -8,7 +8,7 @@ import com.xsoftware.movieapplication.databinding.MovieBannerBinding
 import com.xsoftware.movieapplication.models.Movie
 
 class MovieAdapter(
-    private val movies: List<Movie>,
+    private val movies: MutableList<Movie>,
     private val listener: OnItemClickListener
 ) : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
 
@@ -33,4 +33,10 @@ class MovieAdapter(
     }
 
     override fun getItemCount(): Int = movies.size
+
+    fun addMovies(newMovies: List<Movie>) {
+        val startPosition = movies.size
+        movies.addAll(newMovies)
+        notifyItemRangeInserted(startPosition, newMovies.size)
+    }
 }

@@ -91,8 +91,76 @@
                 android:id="@+id/rv_now_playing"
                 android:layout_width="match_parent"
                 android:layout_height="136dp" />
+
+            <TextView
+                android:id="@+id/actiontextview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="6dp"
+                android:text="Action Movies"
+                android:fontFamily="serif"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_action_movies"
+                android:layout_width="match_parent"
+                android:layout_height="136dp" />
+
+            <TextView
+                android:id="@+id/comedytextview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="6dp"
+                android:text="Comedy Movies"
+                android:fontFamily="serif"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_comedy_movies"
+                android:layout_width="match_parent"
+                android:layout_height="136dp" />
+
+            <TextView
+                android:id="@+id/horrortextview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="6dp"
+                android:text="Horror Movies"
+                android:fontFamily="serif"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_horror_movies"
+                android:layout_width="match_parent"
+                android:layout_height="136dp" />
+
+
+            <TextView
+                android:id="@+id/turkishTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="6dp"
+                android:text="Turkish Movies"
+                android:fontFamily="serif"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_turkish_movies"
+                android:layout_width="match_parent"
+                android:layout_height="136dp" />
+
         </LinearLayout>
-
     </androidx.core.widget.NestedScrollView>
-
 </LinearLayout>

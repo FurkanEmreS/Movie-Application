@@ -52,7 +52,7 @@ class MovieDetailFragment : Fragment(), MovieAdapter.OnItemClickListener {
             binding.voteAvarageText.text = "Vote Average: " + it.average.toString()
 
             Glide.with(view).load(APIConstants.imageBaseUrl + it.poster).into(binding.imageView)
-            fetchSimilarMovies(it.id!!) { movies -> binding.recycleViewSimilarMovies.adapter = MovieAdapter(movies, this) }
+            fetchSimilarMovies(it.id!!) { movies -> binding.recycleViewSimilarMovies.adapter = MovieAdapter(movies.toMutableList(), this) }
             getCastData(it.id!!) { casts -> binding.castRecycleView.adapter = CastAdapter(casts) }
         }
     }

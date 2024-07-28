@@ -8,6 +8,7 @@ import com.xsoftware.movieapplication.models.SeriesResponse
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 private const val API_KEY = "api_key=" + APIConstants.apiKey
 
@@ -55,4 +56,34 @@ interface MovieApiInterface {
     fun getSeriesCastById(
         @Path("id") id: String
     ): Call<SeriesCastResponse>
+
+    @GET("/3/discover/movie?$API_KEY")
+    fun getActionMovies(
+        @Query("with_genres") genreId: Int = 28,  // Aksiyon tür ID'si
+        @Query("sort_by") sortBy: String = "popularity.desc",
+        @Query("page") page: Int
+    ): Call<MovieResponse>
+
+    @GET("/3/discover/movie?$API_KEY")
+    fun getComedyMovies(
+        @Query("with_genres") genreId: Int = 35,  // Komedi tür ID'si
+        @Query("sort_by") sortBy: String = "popularity.desc",
+        @Query("page") page: Int
+    ): Call<MovieResponse>
+
+    @GET("/3/discover/movie?$API_KEY")
+    fun getHorrorMovies(
+        @Query("with_genres") genreId:String ="27",  // Korku tür ID'si
+        @Query("sort_by") sortBy: String = "popularity.desc",
+        @Query("page") page: Int
+    ): Call<MovieResponse>
+
+    @GET("/3/discover/movie?$API_KEY")
+    fun getTurkishMovies(
+        @Query("sort_by") sortBy: String = "vote_count.desc",
+        @Query("with_original_language") language: String = "tr",
+        @Query("page") page: Int
+
+    ): Call<MovieResponse>
+
 }
