@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/white"
-    tools:context=".SeriesFragment">
+    tools:context=".ComedyMoviesFragment">
 
 
 
@@ -24,71 +24,71 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/popularSeries"
+                android:id="@+id/popularComedyMovies"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="6dp"
                 android:fontFamily="serif"
-                android:text="Popular Series"
+                android:text="Popular Comedy Movies"
                 android:textColor="@color/black"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_popular_series"
+                android:id="@+id/rv_popular_comedy_movies"
                 android:layout_width="match_parent"
                 android:layout_height="136dp" />
 
             <TextView
-                android:id="@+id/topRatedSeries"
+                android:id="@+id/topRatedComedyMovies"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="6dp"
                 android:fontFamily="serif"
-                android:text="Top Rated Series"
+                android:text="Top Rated Comedy Movies"
                 android:textColor="@color/black"
                 android:textStyle="bold" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_top_rated_series"
+                android:id="@+id/rv_top_rated_comedy_movies"
                 android:layout_width="match_parent"
                 android:layout_height="136dp" />
 
             <TextView
-                android:id="@+id/onTheAirSeries"
+                android:id="@+id/upcomingComedyMovies"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="6dp"
                 android:fontFamily="serif"
-                android:text="On The Air"
+                android:text="Upcoming Comedy Movies"
                 android:textColor="@color/black"
                 android:textStyle="bold" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_on_the_air_series"
+                android:id="@+id/rv_upcoming_comedy_movies"
                 android:layout_width="match_parent"
                 android:layout_height="136dp" />
 
             <TextView
-                android:id="@+id/airingTodaySeries"
+                android:id="@+id/turkishComedyMovies"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="6dp"
                 android:fontFamily="serif"
-                android:text="Airing Today"
+                android:text="Turkish Comedy Movies"
                 android:textColor="@color/black"
                 android:textStyle="bold" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_airing_today_series"
+                android:id="@+id/rv_turkish_comedy_movies"
                 android:layout_width="match_parent"
                 android:layout_height="136dp" />
         </LinearLayout>

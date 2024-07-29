@@ -37,13 +37,6 @@ class SeriesFragment : Fragment(), SeriesAdapter.OnItemClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val seriesButton :Button = view.findViewById(R.id.seriesButton)
-        seriesButton.text = "Movies"
-
-        seriesButton.setOnClickListener{
-            (activity as? MainActivity)?.showMainList()
-
-        }
 
 
         binding.rvPopularSeries.layoutManager = LinearLayoutManager(view.context, RecyclerView.HORIZONTAL, false)

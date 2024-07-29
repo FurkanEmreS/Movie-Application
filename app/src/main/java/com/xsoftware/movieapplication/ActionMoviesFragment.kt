@@ -1,28 +1,25 @@
 package com.xsoftware.movieapplication
 
-import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.xsoftware.movieapplication.databinding.FragmentMainBinding
+import com.xsoftware.movieapplication.databinding.FragmentActionMoviesBinding
 import com.xsoftware.movieapplication.models.Movie
 import com.xsoftware.movieapplication.models.MovieResponse
-import com.xsoftware.movieapplication.models.Series
 import com.xsoftware.movieapplication.services.MovieApiInterface
 import com.xsoftware.movieapplication.services.MovieApiService
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class MainFragment : Fragment(), MovieAdapter.OnItemClickListener {
 
-    private lateinit var binding: FragmentMainBinding
+class ActionMoviesFragment : Fragment() ,MovieAdapter.OnItemClickListener{
+    private lateinit var binding: FragmentActionMoviesBinding
     private var isLoading = false
     private var currentHorrorPage = 1
     private var totalHorrorPage = 5
@@ -43,31 +40,32 @@ class MainFragment : Fragment(), MovieAdapter.OnItemClickListener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentMainBinding.inflate(inflater, container, false)
+        binding = FragmentActionMoviesBinding.inflate(inflater, container, false)
         return binding.root
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.catagoriesButton.setOnClickListener {
-            (activity as? MainActivity)?.showCategories()
-        }
 
-        binding.rvPopularMovies.layoutManager =
-            LinearLayoutManager(view.context, RecyclerView.HORIZONTAL, false)
-        binding.rvPopularMovies.setHasFixedSize(true)
 
-        binding.rvUpcomingMovies.layoutManager =
+        binding.rvPopularActionMovies.layoutManager =
             LinearLayoutManager(view.context, RecyclerView.HORIZONTAL, false)
-        binding.rvUpcomingMovies.setHasFixedSize(true)
+        binding.rvPopularActionMovies.setHasFixedSize(true)
 
-        binding.rvTopRatedMovies.layoutManager =
+        binding.rvOnTheAirActionMovies.layoutManager =
             LinearLayoutManager(view.context, RecyclerView.HORIZONTAL, false)
-        binding.rvTopRatedMovies.setHasFixedSize(true)
+        binding.rvOnTheAirActionMovies.setHasFixedSize(true)
 
-        binding.rvNowPlaying.layoutManager =
+        binding.rvTopRatedActionMovies.layoutManager =
             LinearLayoutManager(view.context, RecyclerView.HORIZONTAL, false)
-        binding.rvNowPlaying.setHasFixedSize(true)
+        binding.rvTopRatedActionMovies.setHasFixedSize(true)
+
+        binding.rvTurkishActionMovies.layoutManager =
+            LinearLayoutManager(view.context, RecyclerView.HORIZONTAL, false)
+        binding.rvTurkishActionMovies.setHasFixedSize(true)
+
+        /*
 
         binding.rvActionMovies.layoutManager =
             LinearLayoutManager(view.context, RecyclerView.HORIZONTAL, false)
@@ -77,6 +75,11 @@ class MainFragment : Fragment(), MovieAdapter.OnItemClickListener {
             LinearLayoutManager(view.context, RecyclerView.HORIZONTAL, false)
         binding.rvTurkishMovies.layoutManager =
             LinearLayoutManager(view.context, RecyclerView.HORIZONTAL, false)
+
+         */
+
+
+        /*
 
         binding.rvHorrorMovies.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
@@ -149,26 +152,39 @@ class MainFragment : Fragment(), MovieAdapter.OnItemClickListener {
                 }
             }
         })
+        /*
+
+
+         */
+         */
+
+
+
+
+
 
         getBothMovieData()
-        getGenreMovieData()
+       // getGenreMovieData()
     }
 
     private fun getBothMovieData() {
-        getPopularMovieDatas { movies ->
-            binding.rvPopularMovies.adapter = MovieAdapter(movies.toMutableList(), this)
+        getPopularActionMovies { movies ->
+            binding.rvPopularActionMovies.adapter = MovieAdapter(movies.toMutableList(), this)
         }
-        getUpcomingMoviesDatas { movies ->
-            binding.rvUpcomingMovies.adapter = MovieAdapter(movies.toMutableList(), this)
+        getUpcomingActionMovies { movies ->
+            binding.rvOnTheAirActionMovies.adapter = MovieAdapter(movies.toMutableList(), this)
         }
-        getTopRatedMovies { movies ->
-            binding.rvTopRatedMovies.adapter = MovieAdapter(movies.toMutableList(), this)
+        getTopRatedActionMovies { movies ->
+            binding.rvTopRatedActionMovies.adapter = MovieAdapter(movies.toMutableList(), this)
         }
-        getNowPlayingMoviesData { movies ->
-            binding.rvNowPlaying.adapter = MovieAdapter(movies.toMutableList(), this)
+        getTurkishActionMovies { movies ->
+            binding.rvTurkishActionMovies.adapter = MovieAdapter(movies.toMutableList(), this)
         }
     }
 
+
+
+/*
     private fun getGenreMovieData() {
         getActionMovies(currentActionPage) { movies ->
             binding.rvActionMovies.adapter = MovieAdapter(movies.toMutableList(), this)
@@ -186,6 +202,10 @@ class MainFragment : Fragment(), MovieAdapter.OnItemClickListener {
         }
     }
 
+ */
+
+
+    /*
     private fun loadMoreHorrorMovies() {
         isLoading = true
         getHorrorMovies(currentHorrorPage) { movies ->
@@ -218,10 +238,12 @@ class MainFragment : Fragment(), MovieAdapter.OnItemClickListener {
         }
     }
 
-    private fun getPopularMovieDatas(callback: (List<Movie>) -> Unit) {
+     */
+
+    private fun getPopularActionMovies(callback: (List<Movie>) -> Unit) {
         val apiService =
             MovieApiService.getInstance(requireContext()).create(MovieApiInterface::class.java)
-        apiService.getMovieList().enqueue(object : Callback<MovieResponse> {
+        apiService.getPopularActiconMovies().enqueue(object : Callback<MovieResponse> {
             override fun onFailure(call: Call<MovieResponse>, t: Throwable) {}
             override fun onResponse(call: Call<MovieResponse>, response: Response<MovieResponse>) {
                 callback(response.body()!!.movies)
@@ -229,22 +251,10 @@ class MainFragment : Fragment(), MovieAdapter.OnItemClickListener {
         })
     }
 
-    private fun getUpcomingMoviesDatas(callback: (List<Movie>) -> Unit) {
+    private fun getTopRatedActionMovies(callback: (List<Movie>) -> Unit) {
         val apiService =
             MovieApiService.getInstance(requireContext()).create(MovieApiInterface::class.java)
-        apiService.getUpcomingMovieList().enqueue(object : Callback<MovieResponse> {
-            override fun onResponse(call: Call<MovieResponse>, response: Response<MovieResponse>) {
-                callback(response.body()!!.movies)
-            }
-
-            override fun onFailure(call: Call<MovieResponse>, t: Throwable) {}
-        })
-    }
-
-    private fun getTopRatedMovies(callback: (List<Movie>) -> Unit) {
-        val apiService =
-            MovieApiService.getInstance(requireContext()).create(MovieApiInterface::class.java)
-        apiService.getTopRatedMovieList().enqueue(object : Callback<MovieResponse> {
+        apiService.getTopRatedActionMovies().enqueue(object : Callback<MovieResponse> {
             override fun onResponse(call: Call<MovieResponse>, response: Response<MovieResponse>) {
                 callback(response.body()!!.movies)
             }
@@ -253,10 +263,10 @@ class MainFragment : Fragment(), MovieAdapter.OnItemClickListener {
         })
     }
 
-    private fun getNowPlayingMoviesData(callback: (List<Movie>) -> Unit) {
+    private fun getUpcomingActionMovies(callback: (List<Movie>) -> Unit) {
         val apiService =
             MovieApiService.getInstance(requireContext()).create(MovieApiInterface::class.java)
-        apiService.getNowPlayingMovieList().enqueue(object : Callback<MovieResponse> {
+        apiService.getUpComingActiconMovies().enqueue(object : Callback<MovieResponse> {
             override fun onResponse(call: Call<MovieResponse>, response: Response<MovieResponse>) {
                 callback(response.body()!!.movies)
             }
@@ -264,6 +274,21 @@ class MainFragment : Fragment(), MovieAdapter.OnItemClickListener {
             override fun onFailure(call: Call<MovieResponse>, t: Throwable) {}
         })
     }
+
+    private fun getTurkishActionMovies(callback: (List<Movie>) -> Unit) {
+        val apiService =
+            MovieApiService.getInstance(requireContext()).create(MovieApiInterface::class.java)
+        apiService.getTurkishActionMovies().enqueue(object : Callback<MovieResponse> {
+            override fun onResponse(call: Call<MovieResponse>, response: Response<MovieResponse>) {
+                callback(response.body()!!.movies)
+            }
+
+            override fun onFailure(call: Call<MovieResponse>, t: Throwable) {}
+        })
+    }
+
+
+    /*
 
     private fun getActionMovies(page: Int,callback: (List<Movie>) -> Unit) {
         val apiService =
@@ -319,4 +344,6 @@ class MainFragment : Fragment(), MovieAdapter.OnItemClickListener {
             }
         })
     }
+
+     */
 }

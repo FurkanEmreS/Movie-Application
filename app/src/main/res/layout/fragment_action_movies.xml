@@ -24,71 +24,71 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/popularSeries"
+                android:id="@+id/popularActionMovies"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="6dp"
                 android:fontFamily="serif"
-                android:text="Popular Series"
+                android:text="Popular Action Movies"
                 android:textColor="@color/black"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_popular_series"
+                android:id="@+id/rv_popular_action_movies"
                 android:layout_width="match_parent"
                 android:layout_height="136dp" />
 
             <TextView
-                android:id="@+id/topRatedSeries"
+                android:id="@+id/topRatedActionMovies"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="6dp"
                 android:fontFamily="serif"
-                android:text="Top Rated Series"
+                android:text="Top Rated Action Movies"
                 android:textColor="@color/black"
                 android:textStyle="bold" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_top_rated_series"
+                android:id="@+id/rv_top_rated_action_movies"
                 android:layout_width="match_parent"
                 android:layout_height="136dp" />
 
             <TextView
-                android:id="@+id/onTheAirSeries"
+                android:id="@+id/onTheAirActionMovies"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="6dp"
                 android:fontFamily="serif"
-                android:text="On The Air"
+                android:text="Upcoming Action Movies"
                 android:textColor="@color/black"
                 android:textStyle="bold" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_on_the_air_series"
+                android:id="@+id/rv_on_the_air_action_movies"
                 android:layout_width="match_parent"
                 android:layout_height="136dp" />
 
             <TextView
-                android:id="@+id/airingTodaySeries"
+                android:id="@+id/turkishActionMovies"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="6dp"
                 android:fontFamily="serif"
-                android:text="Airing Today"
+                android:text="Turkish Action Movies"
                 android:textColor="@color/black"
                 android:textStyle="bold" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_airing_today_series"
+                android:id="@+id/rv_turkish_action_movies"
                 android:layout_width="match_parent"
                 android:layout_height="136dp" />
         </LinearLayout>

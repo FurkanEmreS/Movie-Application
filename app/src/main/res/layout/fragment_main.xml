@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -9,7 +11,7 @@
     android:background="@color/white"
     tools:context=".MainFragment">
 
-    <include layout="@layout/toolbar"/>
+
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -18,10 +20,46 @@
         android:fillViewport="true"
         android:layout_gravity="fill_vertical">
 
+
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
+
+            <Button
+                android:id="@+id/moviesButton"
+                android:layout_width="80dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="16dp"
+                android:text="Movies"
+                android:textSize="9sp"
+                android:backgroundTint="@color/black"
+
+                ></Button>
+
+
+            <Button
+                android:id="@+id/seriesButton"
+                android:layout_width="80dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="10dp"
+                android:backgroundTint="@color/black"
+                android:text="Series"
+                android:textSize="9sp"></Button>
+
+            <Button
+                android:id="@+id/catagoriesButton"
+                android:layout_width="80dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="10dp"
+                android:backgroundTint="@color/black"
+                android:text="Catagories"
+                android:textSize="6sp"></Button>
 
             <TextView
                 android:id="@+id/popularMovie"
