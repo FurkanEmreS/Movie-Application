@@ -31,7 +31,7 @@ class CategoriesFragment : Fragment() {
         }
 
         binding.textComedy.setOnClickListener {
-            Toast.makeText(context, "Comedy Selected", Toast.LENGTH_SHORT).show()
+            (activity as? MainActivity)?.showComedyMovies()
         }
 
         binding.textTurkish.setOnClickListener {

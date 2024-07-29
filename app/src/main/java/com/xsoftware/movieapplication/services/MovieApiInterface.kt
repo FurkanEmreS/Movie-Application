@@ -125,6 +125,47 @@ interface MovieApiInterface {
         ): Call<MovieResponse>
 
     //Action Movies
+
+
+
+    //Comedy Movies
+    @GET("/3/discover/movie?$API_KEY")
+    fun getPopularComedyMovies(
+        @Query("sort_by") sortBy: String = "popularity.desc",
+        @Query("with_genres") genreId: Int = 35,
+
+
+        ): Call<MovieResponse>
+
+    @GET("/3/discover/movie?$API_KEY")
+    fun getTopRatedComedyMovies(
+        @Query("sort_by") sortBy: String = "vote_count.desc",
+        @Query("with_genres") genreId: Int = 35,
+
+        ): Call<MovieResponse>
+
+
+    @GET("/3/discover/movie?$API_KEY")
+    fun getUpComingComedyMovies(
+        @Query("with_genres") genreId: Int = 35,
+        @Query("primary_release_year") year: Int = 2025
+    ): Call<MovieResponse>
+
+
+
+    @GET("/3/discover/movie?$API_KEY")
+    fun getTurkishComedyMovies(
+        @Query("sort_by") sortBy: String = "vote_count.desc",
+        @Query("with_genres") genreId: Int = 35,
+        @Query("with_original_language") language: String = "tr"
+
+    ): Call<MovieResponse>
+
+
+
+
+
+
     //Comedy Movies
 
 
