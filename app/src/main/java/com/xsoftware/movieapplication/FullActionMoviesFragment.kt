@@ -104,6 +104,9 @@ class FullActionMoviesFragment : Fragment(), MovieAdapter.OnItemClickListener {
     }
 
     override fun onItemClick(movie: Movie) {
-        (activity as? MainActivity)?.addMovieDetail(movie)
+        (activity as? MainActivity)?.apply {
+            shouldReloadFullActionMovies = true
+            addMovieDetail(movie)
+        }
     }
 }

@@ -22,6 +22,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var navView: NavigationView
     private lateinit var actionBarDrawerToggle: ActionBarDrawerToggle
     private lateinit var toolbar: Toolbar
+    var shouldReloadFullActionMovies = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -120,6 +121,7 @@ class MainActivity : AppCompatActivity() {
 
 
     fun showFullActionMovies() {
+        shouldReloadFullActionMovies = true
         supportFragmentManager.popBackStack(null, androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE)
         supportFragmentManager.commit {
             replace<FullActionMoviesFragment>(R.id.fragmentContainerView)
@@ -160,7 +162,13 @@ class MainActivity : AppCompatActivity() {
                 .create()
                 .show()
         } else {
-            supportFragmentManager.popBackStack()
+            if (shouldReloadFullActionMovies) {
+                supportFragmentManager.popBackStack()
+                showFullActionMovies()
+                shouldReloadFullActionMovies = false
+            } else {
+                super.onBackPressed()
+            }
         }
     }
 }
