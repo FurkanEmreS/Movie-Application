@@ -138,6 +138,16 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    fun showHorrorMovies() {
+        supportFragmentManager.popBackStack(null, androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE)
+        supportFragmentManager.commit {
+            replace<HorrorMoviesFragment>(R.id.fragmentContainerView)
+            setReorderingAllowed(true)
+            addToBackStack(null)
+        }
+    }
+
+
     override fun onBackPressed() {
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START)

@@ -27,7 +27,7 @@ class CategoriesFragment : Fragment() {
 
         // TextView'lara tıklama olaylarını ekle
         binding.textHorror.setOnClickListener {
-            Toast.makeText(context, "Horror Selected", Toast.LENGTH_SHORT).show()
+            (activity as? MainActivity)?.showHorrorMovies()
         }
 
         binding.textComedy.setOnClickListener {
