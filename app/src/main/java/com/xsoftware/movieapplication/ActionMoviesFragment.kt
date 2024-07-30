@@ -48,6 +48,10 @@ class ActionMoviesFragment : Fragment() ,MovieAdapter.OnItemClickListener{
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.viewAllActionMovies.setOnClickListener(){
+            (activity as? MainActivity)?.showFullActionMovies()
+        }
+
 
         binding.rvPopularActionMovies.layoutManager =
             LinearLayoutManager(view.context, RecyclerView.HORIZONTAL, false)

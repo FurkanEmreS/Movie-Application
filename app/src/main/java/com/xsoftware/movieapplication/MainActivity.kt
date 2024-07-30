@@ -119,6 +119,16 @@ class MainActivity : AppCompatActivity() {
     }
 
 
+    fun showFullActionMovies() {
+        supportFragmentManager.popBackStack(null, androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE)
+        supportFragmentManager.commit {
+            replace<FullActionMoviesFragment>(R.id.fragmentContainerView)
+            setReorderingAllowed(true)
+            addToBackStack(null)
+        }
+    }
+
+
     fun showComedyMovies() {
         supportFragmentManager.popBackStack(null, androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE)
         supportFragmentManager.commit {

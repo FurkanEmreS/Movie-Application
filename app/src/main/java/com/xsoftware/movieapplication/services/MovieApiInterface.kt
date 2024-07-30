@@ -158,16 +158,44 @@ interface MovieApiInterface {
         @Query("sort_by") sortBy: String = "vote_count.desc",
         @Query("with_genres") genreId: Int = 35,
         @Query("with_original_language") language: String = "tr"
-
     ): Call<MovieResponse>
-
-
-
-
 
 
     //Comedy Movies
 
+    //Horror Movies
+    @GET("/3/discover/movie?$API_KEY")
+    fun getPopularHorrorMovies(
+        @Query("sort_by") sortBy: String = "popularity.desc",
+        @Query("with_genres") genreId: Int = 27,
 
 
+        ): Call<MovieResponse>
+
+    @GET("/3/discover/movie?$API_KEY")
+    fun getTopRatedHorrorMovies(
+        @Query("sort_by") sortBy: String = "vote_count.desc",
+        @Query("with_genres") genreId: Int = 27,
+
+        ): Call<MovieResponse>
+
+
+    @GET("/3/discover/movie?$API_KEY")
+    fun getUpComingHorrorMovies(
+        @Query("with_genres") genreId: Int = 27,
+        @Query("primary_release_year") year: Int = 2025
+    ): Call<MovieResponse>
+
+
+
+    @GET("/3/discover/movie?$API_KEY")
+    fun getTurkishHorrorMovies(
+        @Query("sort_by") sortBy: String = "vote_count.desc",
+        @Query("with_genres") genreId: Int = 27,
+        @Query("with_original_language") language: String = "tr"
+    ): Call<MovieResponse>
+
+
+
+    //Horror Movies
 }

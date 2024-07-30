@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/white"
-    tools:context=".SeriesFragment">
+    tools:context=".ComedyMoviesFragment">
 
 
 
@@ -24,87 +24,73 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/popularActionMovies"
+                android:id="@+id/popularHorrorMovies"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="6dp"
                 android:fontFamily="serif"
-                android:text="Popular Action Movies"
+                android:text="Popular Horror Movies"
                 android:textColor="@color/black"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_popular_action_movies"
+                android:id="@+id/rv_popular_horror_movies"
                 android:layout_width="match_parent"
                 android:layout_height="136dp" />
 
             <TextView
-                android:id="@+id/topRatedActionMovies"
+                android:id="@+id/topRatedHorrorMovies"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="6dp"
                 android:fontFamily="serif"
-                android:text="Top Rated Action Movies"
+                android:text="Top Rated Horror Movies"
                 android:textColor="@color/black"
                 android:textStyle="bold" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_top_rated_action_movies"
+                android:id="@+id/rv_top_rated_horror_movies"
                 android:layout_width="match_parent"
                 android:layout_height="136dp" />
 
             <TextView
-                android:id="@+id/onTheAirActionMovies"
+                android:id="@+id/upcomingHorrorMovies"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="6dp"
                 android:fontFamily="serif"
-                android:text="Upcoming Action Movies"
+                android:text="Upcoming Horror Movies"
                 android:textColor="@color/black"
                 android:textStyle="bold" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_on_the_air_action_movies"
+                android:id="@+id/rv_upcoming_horror_movies"
                 android:layout_width="match_parent"
                 android:layout_height="136dp" />
 
             <TextView
-                android:id="@+id/turkishActionMovies"
+                android:id="@+id/turkishHorrorMovies"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="6dp"
                 android:fontFamily="serif"
-                android:text="Turkish Action Movies"
+                android:text="Turkish Horror Movies"
                 android:textColor="@color/black"
                 android:textStyle="bold" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_turkish_action_movies"
+                android:id="@+id/rv_turkish_horror_movies"
                 android:layout_width="match_parent"
                 android:layout_height="136dp" />
-
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:backgroundTint="@color/black"
-                android:textColor="@color/white"
-                android:text="View All"
-                android:id="@+id/viewAllActionMovies"
-
-                >
-
-            </Button>
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
