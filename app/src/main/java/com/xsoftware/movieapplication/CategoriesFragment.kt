@@ -25,6 +25,10 @@ class CategoriesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.closeButton.setOnClickListener {
+            (activity as? MainActivity)?.popBackStack()
+        }
+
         // TextView'lara tıklama olaylarını ekle
         binding.textHorror.setOnClickListener {
             (activity as? MainActivity)?.showHorrorMovies()

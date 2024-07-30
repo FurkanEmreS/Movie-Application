@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.xsoftware.movieapplication.databinding.FragmentActionMoviesBinding
@@ -47,6 +48,14 @@ class ActionMoviesFragment : Fragment() ,MovieAdapter.OnItemClickListener{
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val toolbarImage : ImageView = view.findViewById(R.id.iv_logo)
+        toolbarImage.visibility = View.GONE
+        val backButton : ImageView = view.findViewById(R.id.back_button)
+        backButton.setOnClickListener{
+            (activity as? MainActivity)?.showMainList()
+
+        }
 
         binding.viewAllActionMovies.setOnClickListener(){
             (activity as? MainActivity)?.showFullActionMovies()

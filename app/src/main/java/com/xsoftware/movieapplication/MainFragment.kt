@@ -8,8 +8,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
+import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.navigation.NavigationView
 import com.xsoftware.movieapplication.databinding.FragmentMainBinding
 import com.xsoftware.movieapplication.models.Movie
 import com.xsoftware.movieapplication.models.MovieResponse
@@ -23,6 +30,10 @@ import retrofit2.Response
 class MainFragment : Fragment(), MovieAdapter.OnItemClickListener {
 
     private lateinit var binding: FragmentMainBinding
+    private lateinit var drawerLayout: DrawerLayout
+    private lateinit var navView: NavigationView
+    private lateinit var actionBarDrawerToggle: ActionBarDrawerToggle
+    private lateinit var toolbar: Toolbar
     private var isLoading = false
     private var currentHorrorPage = 1
     private var totalHorrorPage = 5
@@ -49,36 +60,106 @@ class MainFragment : Fragment(), MovieAdapter.OnItemClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        drawerLayout = binding.drawerLayout
+        navView = binding.navView
+        toolbar = view.findViewById(R.id.toolbar)
+        val backButton :ImageView = view.findViewById(R.id.back_button)
+        backButton.visibility = View.GONE
+
+
+
+        // Toolbar'ı ayarla
+        (activity as AppCompatActivity).setSupportActionBar(toolbar)
+
+        // ActionBarDrawerToggle'ı ayarla
+        actionBarDrawerToggle = ActionBarDrawerToggle(
+            activity, drawerLayout, toolbar,
+            R.string.drawer_open, R.string.drawer_close
+        )
+        drawerLayout.addDrawerListener(actionBarDrawerToggle)
+        actionBarDrawerToggle.syncState()
+
+        // Navigation view item seçimi dinleyicisini ayarla
+        navView.setNavigationItemSelectedListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.nav_movies -> {
+                    // Ana listeyi göster
+                }
+                R.id.nav_series -> {
+                    // Dizi listesini göster
+                }
+            }
+            drawerLayout.closeDrawer(GravityCompat.START)
+            true
+        }
+
         binding.catagoriesButton.setOnClickListener {
             (activity as? MainActivity)?.showCategories()
         }
 
+        setupRecyclerViews()
+        getBothMovieData()
+        getGenreMovieData()
+    }
+
+    private fun setupRecyclerViews() {
         binding.rvPopularMovies.layoutManager =
-            LinearLayoutManager(view.context, RecyclerView.HORIZONTAL, false)
+            LinearLayoutManager(view?.context, RecyclerView.HORIZONTAL, false)
         binding.rvPopularMovies.setHasFixedSize(true)
 
         binding.rvUpcomingMovies.layoutManager =
-            LinearLayoutManager(view.context, RecyclerView.HORIZONTAL, false)
+            LinearLayoutManager(view?.context, RecyclerView.HORIZONTAL, false)
         binding.rvUpcomingMovies.setHasFixedSize(true)
 
         binding.rvTopRatedMovies.layoutManager =
-            LinearLayoutManager(view.context, RecyclerView.HORIZONTAL, false)
+            LinearLayoutManager(view?.context, RecyclerView.HORIZONTAL, false)
         binding.rvTopRatedMovies.setHasFixedSize(true)
 
         binding.rvNowPlaying.layoutManager =
-            LinearLayoutManager(view.context, RecyclerView.HORIZONTAL, false)
+            LinearLayoutManager(view?.context, RecyclerView.HORIZONTAL, false)
         binding.rvNowPlaying.setHasFixedSize(true)
 
         binding.rvActionMovies.layoutManager =
-            LinearLayoutManager(view.context, RecyclerView.HORIZONTAL, false)
+            LinearLayoutManager(view?.context, RecyclerView.HORIZONTAL, false)
         binding.rvComedyMovies.layoutManager =
-            LinearLayoutManager(view.context, RecyclerView.HORIZONTAL, false)
+            LinearLayoutManager(view?.context, RecyclerView.HORIZONTAL, false)
         binding.rvHorrorMovies.layoutManager =
-            LinearLayoutManager(view.context, RecyclerView.HORIZONTAL, false)
+            LinearLayoutManager(view?.context, RecyclerView.HORIZONTAL, false)
         binding.rvTurkishMovies.layoutManager =
-            LinearLayoutManager(view.context, RecyclerView.HORIZONTAL, false)
+            LinearLayoutManager(view?.context, RecyclerView.HORIZONTAL, false)
 
-        binding.rvHorrorMovies.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+        binding.rvHorrorMovies.addOnScrollListener(createOnScrollListener {
+            if (currentHorrorPage < totalHorrorPage) {
+                currentHorrorPage++
+                loadMoreHorrorMovies()
+            }
+        })
+
+        binding.rvTurkishMovies.addOnScrollListener(createOnScrollListener {
+            if (currentTurkishPage < totalTurkishPage) {
+                currentTurkishPage++
+                loadMoreTurkishMovies()
+            }
+        })
+
+        binding.rvComedyMovies.addOnScrollListener(createOnScrollListener {
+            if (currentComedyPage < totalComedyPage) {
+                currentComedyPage++
+                loadMoreComedyMovies()
+            }
+        })
+
+        binding.rvActionMovies.addOnScrollListener(createOnScrollListener {
+            if (currentActionPage < totalActionPage) {
+                currentActionPage++
+                loadMoreActionMovies()
+            }
+        })
+    }
+
+    private fun createOnScrollListener(loadMore: () -> Unit): RecyclerView.OnScrollListener {
+        return object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
 
@@ -88,70 +169,10 @@ class MainFragment : Fragment(), MovieAdapter.OnItemClickListener {
                 val firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition()
 
                 if (!isLoading && firstVisibleItemPosition + visibleItemCount >= totalItemCount && firstVisibleItemPosition >= 0) {
-                    if (currentHorrorPage < totalHorrorPage) {
-                        currentHorrorPage++
-                        loadMoreHorrorMovies()
-                    }
+                    loadMore()
                 }
             }
-        })
-
-        binding.rvTurkishMovies.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                super.onScrolled(recyclerView, dx, dy)
-
-                val layoutManager = recyclerView.layoutManager as LinearLayoutManager
-                val visibleItemCount = layoutManager.childCount
-                val totalItemCount = layoutManager.itemCount
-                val firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition()
-
-                if (!isLoading && firstVisibleItemPosition + visibleItemCount >= totalItemCount && firstVisibleItemPosition >= 0) {
-                    if (currentTurkishPage < totalTurkishPage) {
-                        currentTurkishPage++
-                        loadMoreTurkishMovies()
-                    }
-                }
-            }
-        })
-
-        binding.rvComedyMovies.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                super.onScrolled(recyclerView, dx, dy)
-
-                val layoutManager = recyclerView.layoutManager as LinearLayoutManager
-                val visibleItemCount = layoutManager.childCount
-                val totalItemCount = layoutManager.itemCount
-                val firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition()
-
-                if (!isLoading && firstVisibleItemPosition + visibleItemCount >= totalItemCount && firstVisibleItemPosition >= 0) {
-                    if (currentComedyPage < totalComedyPage) {
-                        currentComedyPage++
-                        loadMoreComedyMovies()
-                    }
-                }
-            }
-        })
-
-        binding.rvActionMovies.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                super.onScrolled(recyclerView, dx, dy)
-
-                val layoutManager = recyclerView.layoutManager as LinearLayoutManager
-                val visibleItemCount = layoutManager.childCount
-                val totalItemCount = layoutManager.itemCount
-                val firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition()
-
-                if (!isLoading && firstVisibleItemPosition + visibleItemCount >= totalItemCount && firstVisibleItemPosition >= 0) {
-                    if (currentActionPage < totalActionPage) {
-                        currentActionPage++
-                        loadMoreActionMovies()
-                    }
-                }
-            }
-        })
-
-        getBothMovieData()
-        getGenreMovieData()
+        }
     }
 
     private fun getBothMovieData() {
@@ -182,7 +203,6 @@ class MainFragment : Fragment(), MovieAdapter.OnItemClickListener {
 
         getTurkishMovies(currentTurkishPage) { movies ->
             binding.rvTurkishMovies.adapter = MovieAdapter(movies.toMutableList(), this)
-
         }
     }
 
@@ -194,7 +214,7 @@ class MainFragment : Fragment(), MovieAdapter.OnItemClickListener {
         }
     }
 
-    private fun  loadMoreTurkishMovies(){
+    private fun loadMoreTurkishMovies(){
         isLoading = true
         getTurkishMovies(currentTurkishPage) { movies ->
             (binding.rvTurkishMovies.adapter as MovieAdapter).addMovies(movies)
@@ -219,8 +239,7 @@ class MainFragment : Fragment(), MovieAdapter.OnItemClickListener {
     }
 
     private fun getPopularMovieDatas(callback: (List<Movie>) -> Unit) {
-        val apiService =
-            MovieApiService.getInstance(requireContext()).create(MovieApiInterface::class.java)
+        val apiService = MovieApiService.getInstance(requireContext()).create(MovieApiInterface::class.java)
         apiService.getMovieList().enqueue(object : Callback<MovieResponse> {
             override fun onFailure(call: Call<MovieResponse>, t: Throwable) {}
             override fun onResponse(call: Call<MovieResponse>, response: Response<MovieResponse>) {
@@ -230,8 +249,7 @@ class MainFragment : Fragment(), MovieAdapter.OnItemClickListener {
     }
 
     private fun getUpcomingMoviesDatas(callback: (List<Movie>) -> Unit) {
-        val apiService =
-            MovieApiService.getInstance(requireContext()).create(MovieApiInterface::class.java)
+        val apiService = MovieApiService.getInstance(requireContext()).create(MovieApiInterface::class.java)
         apiService.getUpcomingMovieList().enqueue(object : Callback<MovieResponse> {
             override fun onResponse(call: Call<MovieResponse>, response: Response<MovieResponse>) {
                 callback(response.body()!!.movies)
@@ -242,8 +260,7 @@ class MainFragment : Fragment(), MovieAdapter.OnItemClickListener {
     }
 
     private fun getTopRatedMovies(callback: (List<Movie>) -> Unit) {
-        val apiService =
-            MovieApiService.getInstance(requireContext()).create(MovieApiInterface::class.java)
+        val apiService = MovieApiService.getInstance(requireContext()).create(MovieApiInterface::class.java)
         apiService.getTopRatedMovieList().enqueue(object : Callback<MovieResponse> {
             override fun onResponse(call: Call<MovieResponse>, response: Response<MovieResponse>) {
                 callback(response.body()!!.movies)
@@ -254,8 +271,7 @@ class MainFragment : Fragment(), MovieAdapter.OnItemClickListener {
     }
 
     private fun getNowPlayingMoviesData(callback: (List<Movie>) -> Unit) {
-        val apiService =
-            MovieApiService.getInstance(requireContext()).create(MovieApiInterface::class.java)
+        val apiService = MovieApiService.getInstance(requireContext()).create(MovieApiInterface::class.java)
         apiService.getNowPlayingMovieList().enqueue(object : Callback<MovieResponse> {
             override fun onResponse(call: Call<MovieResponse>, response: Response<MovieResponse>) {
                 callback(response.body()!!.movies)
@@ -265,9 +281,8 @@ class MainFragment : Fragment(), MovieAdapter.OnItemClickListener {
         })
     }
 
-    private fun getActionMovies(page: Int,callback: (List<Movie>) -> Unit) {
-        val apiService =
-            MovieApiService.getInstance(requireContext()).create(MovieApiInterface::class.java)
+    private fun getActionMovies(page: Int, callback: (List<Movie>) -> Unit) {
+        val apiService = MovieApiService.getInstance(requireContext()).create(MovieApiInterface::class.java)
         apiService.getActionMovies(page = page).enqueue(object : Callback<MovieResponse> {
             override fun onResponse(call: Call<MovieResponse>, response: Response<MovieResponse>) {
                 callback(response.body()!!.movies)
@@ -279,9 +294,8 @@ class MainFragment : Fragment(), MovieAdapter.OnItemClickListener {
         })
     }
 
-    private fun getComedyMovies(page: Int,callback: (List<Movie>) -> Unit) {
-        val apiService =
-            MovieApiService.getInstance(requireContext()).create(MovieApiInterface::class.java)
+    private fun getComedyMovies(page: Int, callback: (List<Movie>) -> Unit) {
+        val apiService = MovieApiService.getInstance(requireContext()).create(MovieApiInterface::class.java)
         apiService.getComedyMovies(page = page).enqueue(object : Callback<MovieResponse> {
             override fun onResponse(call: Call<MovieResponse>, response: Response<MovieResponse>) {
                 callback(response.body()!!.movies)
@@ -294,21 +308,20 @@ class MainFragment : Fragment(), MovieAdapter.OnItemClickListener {
     }
 
     private fun getHorrorMovies(page: Int, callback: (List<Movie>) -> Unit) {
-        val apiService =
-            MovieApiService.getInstance(requireContext()).create(MovieApiInterface::class.java)
+        val apiService = MovieApiService.getInstance(requireContext()).create(MovieApiInterface::class.java)
         apiService.getHorrorMovies(page = page).enqueue(object : Callback<MovieResponse> {
             override fun onFailure(call: Call<MovieResponse>, t: Throwable) {
                 isLoading = false
             }
+
             override fun onResponse(call: Call<MovieResponse>, response: Response<MovieResponse>) {
                 callback(response.body()!!.movies)
             }
         })
     }
 
-    private fun getTurkishMovies(page:Int,callback: (List<Movie>) -> Unit) {
-        val apiService =
-            MovieApiService.getInstance(requireContext()).create(MovieApiInterface::class.java)
+    private fun getTurkishMovies(page: Int, callback: (List<Movie>) -> Unit) {
+        val apiService = MovieApiService.getInstance(requireContext()).create(MovieApiInterface::class.java)
         apiService.getTurkishMovies(page = page).enqueue(object : Callback<MovieResponse> {
             override fun onResponse(call: Call<MovieResponse>, response: Response<MovieResponse>) {
                 callback(response.body()!!.movies)
@@ -319,4 +332,6 @@ class MainFragment : Fragment(), MovieAdapter.OnItemClickListener {
             }
         })
     }
+
+
 }

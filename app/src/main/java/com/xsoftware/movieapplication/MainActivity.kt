@@ -18,49 +18,19 @@ import androidx.appcompat.widget.Toolbar
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var drawerLayout: DrawerLayout
-    private lateinit var navView: NavigationView
-    private lateinit var actionBarDrawerToggle: ActionBarDrawerToggle
-    private lateinit var toolbar: Toolbar
     var shouldReloadFullActionMovies = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // Görünümleri başlat
-        drawerLayout = findViewById(R.id.drawer_layout)
-        navView = findViewById(R.id.nav_view)
-        toolbar = findViewById(R.id.toolbar)
-
-        // Toolbar'ı ayarla
-        setSupportActionBar(toolbar)
-
-        // ActionBarDrawerToggle'ı ayarla
-        actionBarDrawerToggle = ActionBarDrawerToggle(
-            this, drawerLayout, toolbar,
-            R.string.drawer_open, R.string.drawer_close
-        )
-        drawerLayout.addDrawerListener(actionBarDrawerToggle)
-        actionBarDrawerToggle.syncState()
-
-        // Navigation view item seçimi dinleyicisini ayarla
-        navView.setNavigationItemSelectedListener { menuItem ->
-            when (menuItem.itemId) {
-                R.id.nav_movies -> {
-                    showMainList()
-                }
-                R.id.nav_series -> {
-                    showSeriesList()
-                }
-            }
-            drawerLayout.closeDrawer(GravityCompat.START)
-            true
-        }
-
         if (savedInstanceState == null) {
             showMainList()
         }
+    }
+
+    fun popBackStack() {
+        supportFragmentManager.popBackStack()
     }
 
     fun showMainList() {
@@ -100,8 +70,8 @@ class MainActivity : AppCompatActivity() {
             addToBackStack(null)
         }
     }
+
     fun showCategories() {
-        supportFragmentManager.popBackStack(null, androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE)
         supportFragmentManager.commit {
             replace<CategoriesFragment>(R.id.fragmentContainerView)
             setReorderingAllowed(true)
@@ -109,27 +79,21 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-
     fun showActionMovies() {
-        supportFragmentManager.popBackStack(null, androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE)
         supportFragmentManager.commit {
             replace<ActionMoviesFragment>(R.id.fragmentContainerView)
             setReorderingAllowed(true)
-            addToBackStack(null)
         }
     }
 
-
     fun showFullActionMovies() {
         shouldReloadFullActionMovies = true
-        supportFragmentManager.popBackStack(null, androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE)
         supportFragmentManager.commit {
             replace<FullActionMoviesFragment>(R.id.fragmentContainerView)
             setReorderingAllowed(true)
             addToBackStack(null)
         }
     }
-
 
     fun showComedyMovies() {
         supportFragmentManager.popBackStack(null, androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE)
@@ -149,11 +113,8 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-
     override fun onBackPressed() {
-        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
-            drawerLayout.closeDrawer(GravityCompat.START)
-        } else if (supportFragmentManager.backStackEntryCount == 1) {
+        if (supportFragmentManager.backStackEntryCount == 1) {
             AlertDialog.Builder(this)
                 .setTitle("Çıkış")
                 .setMessage("Çıkmak istiyor musunuz?")
@@ -162,13 +123,7 @@ class MainActivity : AppCompatActivity() {
                 .create()
                 .show()
         } else {
-            if (shouldReloadFullActionMovies) {
-                supportFragmentManager.popBackStack()
-                showFullActionMovies()
-                shouldReloadFullActionMovies = false
-            } else {
-                super.onBackPressed()
-            }
+            super.onBackPressed()
         }
     }
 }
