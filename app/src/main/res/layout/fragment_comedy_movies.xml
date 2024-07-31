@@ -23,6 +23,10 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <include
+                android:id="@+id/toolbar"
+                layout="@layout/toolbar" />
+
             <TextView
                 android:id="@+id/popularComedyMovies"
                 android:layout_width="match_parent"
@@ -91,6 +95,19 @@
                 android:id="@+id/rv_turkish_comedy_movies"
                 android:layout_width="match_parent"
                 android:layout_height="136dp" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:backgroundTint="@color/black"
+                android:textColor="@color/white"
+                android:text="View All"
+                android:id="@+id/viewAllComedyMovies"
+
+                >
+
+            </Button>
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>

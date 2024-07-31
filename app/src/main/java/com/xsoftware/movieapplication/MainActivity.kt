@@ -96,20 +96,20 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun showComedyMovies() {
-        supportFragmentManager.popBackStack(null, androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE)
+       // supportFragmentManager.popBackStack(null, androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE)
         supportFragmentManager.commit {
             replace<ComedyMoviesFragment>(R.id.fragmentContainerView)
             setReorderingAllowed(true)
-            addToBackStack(null)
+           // addToBackStack(null)
         }
     }
 
     fun showHorrorMovies() {
-        supportFragmentManager.popBackStack(null, androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE)
+        //supportFragmentManager.popBackStack(null, androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE)
         supportFragmentManager.commit {
             replace<HorrorMoviesFragment>(R.id.fragmentContainerView)
             setReorderingAllowed(true)
-            addToBackStack(null)
+          //  addToBackStack(null)
         }
     }
 
