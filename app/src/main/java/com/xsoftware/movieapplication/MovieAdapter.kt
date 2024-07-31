@@ -1,6 +1,7 @@
 package com.xsoftware.movieapplication
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -29,7 +30,13 @@ class MovieAdapter(
     }
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
-        holder.bindMovie(movies[position], listener)
+        val movie = movies[position]
+        if (movie.poster != null) {
+            holder.bindMovie(movie, listener)
+        } else {
+            holder.itemView.layoutParams = RecyclerView.LayoutParams(0, 0)
+            holder.itemView.visibility = View.GONE
+        }
     }
 
     override fun getItemCount(): Int = movies.size

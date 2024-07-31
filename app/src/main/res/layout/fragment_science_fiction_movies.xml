@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/white"
-    tools:context=".HorrorMoviesFragment">
+    tools:context=".ScienceFictionMoviesFragment">
 
 
 
@@ -29,74 +29,73 @@
                 layout="@layout/toolbar" />
 
             <TextView
-                android:id="@+id/popularHorrorMovies"
+                android:id="@+id/popularScienceFictionMovies"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="6dp"
                 android:fontFamily="serif"
-                android:text="Popular Horror Movies"
+                android:text="Popular Science Fiction Movies"
                 android:textColor="@color/black"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_popular_horror_movies"
+                android:id="@+id/rv_popular_science_fiction_movies"
                 android:layout_width="match_parent"
                 android:layout_height="136dp" />
 
             <TextView
-                android:id="@+id/topRatedHorrorMovies"
+                android:id="@+id/topRatedScienceFictionMovies"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="6dp"
                 android:fontFamily="serif"
-                android:text="Top Rated Horror Movies"
+                android:text="Top Rated Science Fiction Movies"
                 android:textColor="@color/black"
                 android:textStyle="bold" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_top_rated_horror_movies"
+                android:id="@+id/rv_top_rated_science_fiction_movies"
                 android:layout_width="match_parent"
                 android:layout_height="136dp" />
 
             <TextView
-                android:id="@+id/upcomingHorrorMovies"
+                android:id="@+id/upcomingScienceFictionMovies"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="6dp"
                 android:fontFamily="serif"
-                android:text="Upcoming Horror Movies"
+                android:text="Upcoming Science Fiction Movies"
                 android:textColor="@color/black"
                 android:textStyle="bold" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_upcoming_horror_movies"
+                android:id="@+id/rv_upcoming_science_fiction_movies"
                 android:layout_width="match_parent"
                 android:layout_height="136dp" />
 
             <TextView
-                android:id="@+id/turkishHorrorMovies"
+                android:id="@+id/turkishScienceFictionMovies"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="6dp"
                 android:fontFamily="serif"
-                android:text="Turkish Horror Movies"
+                android:text="Turkish Science Fiction Movies"
                 android:textColor="@color/black"
                 android:textStyle="bold" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_turkish_horror_movies"
+                android:id="@+id/rv_turkish_science_fiction_movies"
                 android:layout_width="match_parent"
                 android:layout_height="136dp" />
-
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -104,7 +103,7 @@
                 android:backgroundTint="@color/black"
                 android:textColor="@color/white"
                 android:text="View All"
-                android:id="@+id/viewAllHorrorMovies"
+                android:id="@+id/viewAllScienceFictionMovies"
 
                 >
 

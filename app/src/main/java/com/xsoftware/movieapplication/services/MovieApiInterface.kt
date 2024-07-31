@@ -387,7 +387,7 @@ interface MovieApiInterface {
     @GET("/3/discover/movie?$API_KEY")
     fun getTopRatedFantasyMovies(
         @Query("sort_by") sortBy: String = "vote_count.desc",
-        @Query("with_genres") genreId: Int = 14,
+        @Query("with_genres") genreId: Int = 14
 
         ): Call<MovieResponse>
 

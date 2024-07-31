@@ -122,6 +122,57 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    fun showScienceFictionMovies() {
+        //supportFragmentManager.popBackStack(null, androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE)
+        supportFragmentManager.commit {
+            replace<ScienceFictionMoviesFragment>(R.id.fragmentContainerView)
+            setReorderingAllowed(true)
+            //  addToBackStack(null)
+        }
+    }
+
+    fun showRomanceMovies() {
+        //supportFragmentManager.popBackStack(null, androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE)
+        supportFragmentManager.commit {
+            replace<RomanceMoviesFragment>(R.id.fragmentContainerView)
+            setReorderingAllowed(true)
+            //  addToBackStack(null)
+        }
+    }
+    fun showAnimationMovies() {
+        //supportFragmentManager.popBackStack(null, androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE)
+        supportFragmentManager.commit {
+            replace<AnimationMoviesFragment>(R.id.fragmentContainerView)
+            setReorderingAllowed(true)
+            //  addToBackStack(null)
+        }
+    }
+
+    fun showCrimeMovies() {
+        //supportFragmentManager.popBackStack(null, androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE)
+        supportFragmentManager.commit {
+            replace<CrimeMoviesFragment>(R.id.fragmentContainerView)
+            setReorderingAllowed(true)
+            //  addToBackStack(null)
+        }
+    }
+    fun showFantasyMovies() {
+        //supportFragmentManager.popBackStack(null, androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE)
+        supportFragmentManager.commit {
+            replace<FantasyMoviesFragment>(R.id.fragmentContainerView)
+            setReorderingAllowed(true)
+            //  addToBackStack(null)
+        }
+    }
+    fun showDramaMovies() {
+        //supportFragmentManager.popBackStack(null, androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE)
+        supportFragmentManager.commit {
+            replace<DramaMoviesFragment>(R.id.fragmentContainerView)
+            setReorderingAllowed(true)
+            //  addToBackStack(null)
+        }
+    }
+
     override fun onBackPressed() {
         if (supportFragmentManager.backStackEntryCount == 1) {
             AlertDialog.Builder(this)

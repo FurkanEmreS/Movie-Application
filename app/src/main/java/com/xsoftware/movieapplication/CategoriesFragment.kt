@@ -25,29 +25,54 @@ class CategoriesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.closeButton.setOnClickListener {
+        binding.closeButton.setOnClickListener{
             (activity as? MainActivity)?.popBackStack()
         }
 
         // TextView'lara tıklama olaylarını ekle
-        binding.textHorror.setOnClickListener {
+        binding.textHorror.setOnClickListener{
             (activity as? MainActivity)?.showHorrorMovies()
         }
 
-        binding.textComedy.setOnClickListener {
+        binding.textComedy.setOnClickListener{
             (activity as? MainActivity)?.showComedyMovies()
         }
 
-        binding.textTurkish.setOnClickListener {
+        binding.textTurkish.setOnClickListener{
             (activity as? MainActivity)?.showTurkishMovies()
         }
 
-        binding.textAction.setOnClickListener {
+        binding.textAction.setOnClickListener{
             (activity as? MainActivity)?.showActionMovies()
 
 
         }
+        binding.textScienceFiction.setOnClickListener{
+            (activity as? MainActivity)?.showScienceFictionMovies()
+        }
+
+        binding.textRomance.setOnClickListener{
+            (activity as? MainActivity)?.showRomanceMovies()
+        }
+
+        binding.textAnimation.setOnClickListener{
+            (activity as? MainActivity)?.showAnimationMovies()
+        }
+        binding.textCrime.setOnClickListener{
+            (activity as? MainActivity)?.showCrimeMovies()
+        }
+
+        binding.textFantasy.setOnClickListener {
+            (activity as? MainActivity)?.showFantasyMovies()
+        }
+
+        binding.textDrama.setOnClickListener {
+            (activity as? MainActivity)?.showDramaMovies()
+        }
+
     }
+
+
 
     override fun onDestroyView() {
         super.onDestroyView()

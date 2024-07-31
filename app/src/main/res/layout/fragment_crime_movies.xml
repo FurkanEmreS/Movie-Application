@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/white"
-    tools:context=".HorrorMoviesFragment">
+    tools:context=".CrimeMoviesFragment">
 
 
 
@@ -29,71 +29,71 @@
                 layout="@layout/toolbar" />
 
             <TextView
-                android:id="@+id/popularHorrorMovies"
+                android:id="@+id/popularCrimeMovies"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="6dp"
                 android:fontFamily="serif"
-                android:text="Popular Horror Movies"
+                android:text="Popular Crime Movies"
                 android:textColor="@color/black"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_popular_horror_movies"
+                android:id="@+id/rv_popular_crime_movies"
                 android:layout_width="match_parent"
                 android:layout_height="136dp" />
 
             <TextView
-                android:id="@+id/topRatedHorrorMovies"
+                android:id="@+id/topRatedCrimeMovies"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="6dp"
                 android:fontFamily="serif"
-                android:text="Top Rated Horror Movies"
+                android:text="Top Rated Crime Movies"
                 android:textColor="@color/black"
                 android:textStyle="bold" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_top_rated_horror_movies"
+                android:id="@+id/rv_top_rated_crime_movies"
                 android:layout_width="match_parent"
                 android:layout_height="136dp" />
 
             <TextView
-                android:id="@+id/upcomingHorrorMovies"
+                android:id="@+id/upcomingCrimeMovies"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="6dp"
                 android:fontFamily="serif"
-                android:text="Upcoming Horror Movies"
+                android:text="Upcoming Crime Movies"
                 android:textColor="@color/black"
                 android:textStyle="bold" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_upcoming_horror_movies"
+                android:id="@+id/rv_upcoming_crime_movies"
                 android:layout_width="match_parent"
                 android:layout_height="136dp" />
 
             <TextView
-                android:id="@+id/turkishHorrorMovies"
+                android:id="@+id/turkishCrimeMovies"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="6dp"
                 android:fontFamily="serif"
-                android:text="Turkish Horror Movies"
+                android:text="Turkish Crime Movies"
                 android:textColor="@color/black"
                 android:textStyle="bold" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_turkish_horror_movies"
+                android:id="@+id/rv_turkish_crime_movies"
                 android:layout_width="match_parent"
                 android:layout_height="136dp" />
 
@@ -104,7 +104,7 @@
                 android:backgroundTint="@color/black"
                 android:textColor="@color/white"
                 android:text="View All"
-                android:id="@+id/viewAllHorrorMovies"
+                android:id="@+id/viewAllCrimeMovies"
 
                 >
 

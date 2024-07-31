@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/white"
-    tools:context=".HorrorMoviesFragment">
+    tools:context=".DramaMoviesFragment">
 
 
 
@@ -29,74 +29,73 @@
                 layout="@layout/toolbar" />
 
             <TextView
-                android:id="@+id/popularHorrorMovies"
+                android:id="@+id/popularDramaMovies"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="6dp"
                 android:fontFamily="serif"
-                android:text="Popular Horror Movies"
+                android:text="Popular Drama Movies"
                 android:textColor="@color/black"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_popular_horror_movies"
+                android:id="@+id/rv_popular_drama_movies"
                 android:layout_width="match_parent"
                 android:layout_height="136dp" />
 
             <TextView
-                android:id="@+id/topRatedHorrorMovies"
+                android:id="@+id/topRatedDramaMovies"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="6dp"
                 android:fontFamily="serif"
-                android:text="Top Rated Horror Movies"
+                android:text="Top Rated Drama Movies"
                 android:textColor="@color/black"
                 android:textStyle="bold" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_top_rated_horror_movies"
+                android:id="@+id/rv_top_rated_drama_movies"
                 android:layout_width="match_parent"
                 android:layout_height="136dp" />
 
             <TextView
-                android:id="@+id/upcomingHorrorMovies"
+                android:id="@+id/upcomingDramaMovies"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="6dp"
                 android:fontFamily="serif"
-                android:text="Upcoming Horror Movies"
+                android:text="Upcoming Drama Movies"
                 android:textColor="@color/black"
                 android:textStyle="bold" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_upcoming_horror_movies"
+                android:id="@+id/rv_upcoming_drama_movies"
                 android:layout_width="match_parent"
                 android:layout_height="136dp" />
 
             <TextView
-                android:id="@+id/turkishHorrorMovies"
+                android:id="@+id/turkishDramaMovies"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="6dp"
                 android:fontFamily="serif"
-                android:text="Turkish Horror Movies"
+                android:text="Turkish Drama Movies"
                 android:textColor="@color/black"
                 android:textStyle="bold" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_turkish_horror_movies"
+                android:id="@+id/rv_turkish_drama_movies"
                 android:layout_width="match_parent"
                 android:layout_height="136dp" />
-
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -104,7 +103,7 @@
                 android:backgroundTint="@color/black"
                 android:textColor="@color/white"
                 android:text="View All"
-                android:id="@+id/viewAllHorrorMovies"
+                android:id="@+id/viewAllDramaMovies"
 
                 >
 
