@@ -89,7 +89,6 @@ interface MovieApiInterface {
 
 
     //Action Movies
-
     @GET("/3/discover/movie?$API_KEY")
     fun getPopularActiconMovies(
         @Query("sort_by") sortBy: String = "popularity.desc",
@@ -123,7 +122,6 @@ interface MovieApiInterface {
         @Query("with_original_language") language: String = "tr"
 
         ): Call<MovieResponse>
-
     //Action Movies
 
 
@@ -159,9 +157,8 @@ interface MovieApiInterface {
         @Query("with_genres") genreId: Int = 35,
         @Query("with_original_language") language: String = "tr"
     ): Call<MovieResponse>
-
-
     //Comedy Movies
+
 
     //Horror Movies
     @GET("/3/discover/movie?$API_KEY")
@@ -194,8 +191,274 @@ interface MovieApiInterface {
         @Query("with_genres") genreId: Int = 27,
         @Query("with_original_language") language: String = "tr"
     ): Call<MovieResponse>
-
-
-
     //Horror Movies
+
+
+
+    //Turkish Movies
+    @GET("/3/discover/movie?$API_KEY")
+    fun getPopularTurkishMovies(
+        @Query("sort_by") sortBy: String = "popularity.desc",
+        @Query("with_original_language") language: String = "tr"
+
+
+        ): Call<MovieResponse>
+
+    @GET("/3/discover/movie?$API_KEY")
+    fun getTopRatedTurkishMovies(
+        @Query("sort_by") sortBy: String = "vote_count.desc",
+        @Query("with_original_language") language: String = "tr"
+
+        ): Call<MovieResponse>
+
+
+    @GET("/3/discover/movie?$API_KEY")
+    fun getUpComingTurkishMovies(
+        @Query("primary_release_year") year: Int = 2025,
+        @Query("with_original_language") language: String = "tr"
+
+    ): Call<MovieResponse>
+    //Turkish Movies
+
+
+
+    //Science Fiction Movies
+    @GET("/3/discover/movie?$API_KEY")
+    fun getPopularScienceFictionMovies(
+        @Query("sort_by") sortBy: String = "popularity.desc",
+        @Query("with_genres") genreId: Int = 878,
+
+
+        ): Call<MovieResponse>
+
+    @GET("/3/discover/movie?$API_KEY")
+    fun getTopRatedScienceFictionMovies(
+        @Query("sort_by") sortBy: String = "vote_count.desc",
+        @Query("with_genres") genreId: Int = 878,
+
+        ): Call<MovieResponse>
+
+
+    @GET("/3/discover/movie?$API_KEY")
+    fun getUpComingScienceFictionMovies(
+        @Query("sort_by") sortBy: String = "popularity.desc",
+        @Query("with_genres") genreId: Int = 878,
+        @Query("primary_release_year") year: Int = 2025
+
+
+
+
+    ): Call<MovieResponse>
+    @GET("/3/discover/movie?$API_KEY")
+    fun getTurkishScienceFictionMovies(
+        @Query("sort_by") sortBy: String = "vote_count.desc",
+        @Query("with_genres") genreId: Int = 878,
+        @Query("with_original_language") language: String = "tr"
+
+    ): Call<MovieResponse>
+    //Science Fiction Movies
+
+
+
+
+    // Romance Movies
+    @GET("/3/discover/movie?$API_KEY")
+    fun getPopularRomanceMovies(
+        @Query("sort_by") sortBy: String = "popularity.desc",
+        @Query("with_genres") genreId: Int = 10749,
+
+
+        ): Call<MovieResponse>
+
+    @GET("/3/discover/movie?$API_KEY")
+    fun getTopRatedRomanceMovies(
+        @Query("sort_by") sortBy: String = "vote_count.desc",
+        @Query("with_genres") genreId: Int = 10749,
+
+        ): Call<MovieResponse>
+
+
+    @GET("/3/discover/movie?$API_KEY")
+    fun getUpComingRomanceMovies(
+        @Query("sort_by") sortBy: String = "popularity.desc",
+        @Query("with_genres") genreId: Int = 10749,
+        @Query("primary_release_year") year: Int = 2025
+
+
+
+
+    ): Call<MovieResponse>
+    @GET("/3/discover/movie?$API_KEY")
+    fun getTurkishRomanceMovies(
+        @Query("sort_by") sortBy: String = "vote_count.desc",
+        @Query("with_genres") genreId: Int = 10749,
+        @Query("with_original_language") language: String = "tr"
+
+    ): Call<MovieResponse>
+    //Romance Movies
+
+
+
+    //Animation Movies
+    @GET("/3/discover/movie?$API_KEY")
+    fun getPopularAnimationMovies(
+        @Query("sort_by") sortBy: String = "popularity.desc",
+        @Query("with_genres") genreId: Int = 16,
+
+
+        ): Call<MovieResponse>
+
+    @GET("/3/discover/movie?$API_KEY")
+    fun getTopRatedAnimationMovies(
+        @Query("sort_by") sortBy: String = "vote_count.desc",
+        @Query("with_genres") genreId: Int = 16,
+
+        ): Call<MovieResponse>
+
+
+    @GET("/3/discover/movie?$API_KEY")
+    fun getUpComingAnimationMovies(
+        @Query("sort_by") sortBy: String = "popularity.desc",
+        @Query("with_genres") genreId: Int = 16,
+        @Query("primary_release_year") year: Int = 2025
+
+
+
+
+    ): Call<MovieResponse>
+    @GET("/3/discover/movie?$API_KEY")
+    fun getTurkishAnimationMovies(
+        @Query("sort_by") sortBy: String = "vote_count.desc",
+        @Query("with_genres") genreId: Int = 16,
+        @Query("with_original_language") language: String = "tr"
+
+    ): Call<MovieResponse>
+    //Animation Movies
+
+
+
+    //Crime Movies
+    @GET("/3/discover/movie?$API_KEY")
+    fun getPopularCrimeMovies(
+        @Query("sort_by") sortBy: String = "popularity.desc",
+        @Query("with_genres") genreId: Int = 80,
+
+
+        ): Call<MovieResponse>
+
+    @GET("/3/discover/movie?$API_KEY")
+    fun getTopRatedCrimeMovies(
+        @Query("sort_by") sortBy: String = "vote_count.desc",
+        @Query("with_genres") genreId: Int = 80,
+
+        ): Call<MovieResponse>
+
+
+    @GET("/3/discover/movie?$API_KEY")
+    fun getUpComingCrimeMovies(
+        @Query("sort_by") sortBy: String = "popularity.desc",
+        @Query("with_genres") genreId: Int = 80,
+        @Query("primary_release_year") year: Int = 2025
+
+
+
+
+    ): Call<MovieResponse>
+    @GET("/3/discover/movie?$API_KEY")
+    fun getTurkishCrimeMovies(
+        @Query("sort_by") sortBy: String = "vote_count.desc",
+        @Query("with_genres") genreId: Int = 80,
+        @Query("with_original_language") language: String = "tr"
+
+    ): Call<MovieResponse>
+    //Crime Movies
+
+
+    //Fantasy Movies
+
+    @GET("/3/discover/movie?$API_KEY")
+    fun getPopularFantasyMovies(
+        @Query("sort_by") sortBy: String = "popularity.desc",
+        @Query("with_genres") genreId: Int = 14,
+
+
+        ): Call<MovieResponse>
+
+    @GET("/3/discover/movie?$API_KEY")
+    fun getTopRatedFantasyMovies(
+        @Query("sort_by") sortBy: String = "vote_count.desc",
+        @Query("with_genres") genreId: Int = 14,
+
+        ): Call<MovieResponse>
+
+
+    @GET("/3/discover/movie?$API_KEY")
+    fun getUpComingFantasyMovies(
+        @Query("sort_by") sortBy: String = "popularity.desc",
+        @Query("with_genres") genreId: Int = 14,
+        @Query("primary_release_year") year: Int = 2025
+
+
+
+
+    ): Call<MovieResponse>
+    @GET("/3/discover/movie?$API_KEY")
+    fun getTurkishFantasyMovies(
+        @Query("sort_by") sortBy: String = "vote_count.desc",
+        @Query("with_genres") genreId: Int = 14,
+        @Query("with_original_language") language: String = "tr"
+
+    ): Call<MovieResponse>
+    //Fantasy Movies
+
+    //Drama Movies
+
+    @GET("/3/discover/movie?$API_KEY")
+    fun getPopularDramaMovies(
+        @Query("sort_by") sortBy: String = "popularity.desc",
+        @Query("with_genres") genreId: Int = 18,
+
+
+        ): Call<MovieResponse>
+
+    @GET("/3/discover/movie?$API_KEY")
+    fun getTopRatedDramaMovies(
+        @Query("sort_by") sortBy: String = "vote_count.desc",
+        @Query("with_genres") genreId: Int = 18,
+
+        ): Call<MovieResponse>
+
+
+    @GET("/3/discover/movie?$API_KEY")
+    fun getUpComingDramaMovies(
+        @Query("sort_by") sortBy: String = "popularity.desc",
+        @Query("with_genres") genreId: Int = 18,
+        @Query("primary_release_year") year: Int = 2025
+
+
+
+
+    ): Call<MovieResponse>
+    @GET("/3/discover/movie?$API_KEY")
+    fun getTurkishDramaMovies(
+        @Query("sort_by") sortBy: String = "vote_count.desc",
+        @Query("with_genres") genreId: Int = 18,
+        @Query("with_original_language") language: String = "tr"
+
+    ): Call<MovieResponse>
+
+
+
+
+
+    //Drama Movies
+
+
+
+
+
+
+
+
+
 }
