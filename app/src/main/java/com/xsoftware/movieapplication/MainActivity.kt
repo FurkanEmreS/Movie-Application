@@ -113,6 +113,15 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    fun showTurkishMovies() {
+        //supportFragmentManager.popBackStack(null, androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE)
+        supportFragmentManager.commit {
+            replace<TurkishMoviesFragment>(R.id.fragmentContainerView)
+            setReorderingAllowed(true)
+            //  addToBackStack(null)
+        }
+    }
+
     override fun onBackPressed() {
         if (supportFragmentManager.backStackEntryCount == 1) {
             AlertDialog.Builder(this)

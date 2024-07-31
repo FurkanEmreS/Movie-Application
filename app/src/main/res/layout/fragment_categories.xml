@@ -44,6 +44,62 @@
         android:textSize="18sp"
         android:textStyle="bold"
         android:padding="8dp"/>
+    <TextView
+        android:id="@+id/text_scinece_fiction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Science Fiction"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:padding="8dp"/>
+    <TextView
+        android:id="@+id/text_romance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Romance"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:padding="8dp"/>
+    <TextView
+        android:id="@+id/text_animation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Animation"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:padding="8dp"/>
+    <TextView
+        android:id="@+id/text_crime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Crime"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:padding="8dp"/>
+
+    <TextView
+        android:id="@+id/text_fantasy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Fantasy"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:padding="8dp"/>
+
+    <TextView
+        android:id="@+id/text_drama"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Drama"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:padding="8dp"/>
 
 
 
