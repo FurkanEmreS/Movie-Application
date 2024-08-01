@@ -1,6 +1,7 @@
 package com.xsoftware.movieapplication
 
 import android.view.LayoutInflater
+import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.xsoftware.movieapplication.databinding.MovieBannerBinding
@@ -29,7 +30,13 @@ class SeriesAdapter(
     }
 
     override fun onBindViewHolder(holder: SeriesViewHolder, position: Int) {
-        holder.bindSeries(series[position], listener)
+        val series = series[position]
+        if (series.poster != null) {
+            holder.bindSeries(series, listener)
+        } else {
+            holder.itemView.layoutParams = RecyclerView.LayoutParams(0, 0)
+            holder.itemView.visibility = View.GONE
+        }
     }
 
     override fun getItemCount(): Int = series.size

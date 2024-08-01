@@ -1,6 +1,7 @@
 package com.xsoftware.movieapplication.services
 
 import com.xsoftware.movieapplication.APIConstants
+import com.xsoftware.movieapplication.models.GenreResponse
 import com.xsoftware.movieapplication.models.MovieCastResponse
 import com.xsoftware.movieapplication.models.MovieResponse
 import com.xsoftware.movieapplication.models.SeriesCastResponse
@@ -86,7 +87,55 @@ interface MovieApiInterface {
 
     ): Call<MovieResponse>
 
+     //Genre Series
+    @GET("/3/genre/tv/list?$API_KEY")
+    fun getTvGenres(): Call<GenreResponse>
 
+    @GET("/3/discover/tv?$API_KEY")
+    fun getSeriesByGenre(
+        @Query("with_genres") genreId: Int,
+        @Query("sort_by") sortBy: String = "popularity.desc",
+        @Query("page") page: Int = 1
+    ): Call<SeriesResponse>
+
+
+    @GET("/3/discover/tv?$API_KEY")
+    fun getPopularSeriesGenre(
+        @Query("with_genres") genreId: Int,
+        @Query("sort_by") sortBy: String = "popularity.desc",
+        @Query("page") page: Int = 1
+    ): Call<SeriesResponse>
+
+    @GET("/3/discover/tv?$API_KEY")
+    fun getTopRatedSeriesGenre(
+        @Query("with_genres") genreId: Int,
+        @Query("sort_by") sortBy: String = "vote_count.desc",
+        @Query("page") page: Int = 1
+    ): Call<SeriesResponse>
+
+    @GET("/3/discover/tv?$API_KEY")
+    fun getUpComingSeriesGenre(
+        @Query("with_genres") genreId: Int,
+        @Query("sort_by") sortBy: String = "first_air_date.desc",
+        @Query("page") page: Int = 1,
+    ): Call<SeriesResponse>
+
+    @GET("/3/discover/tv?$API_KEY")
+    fun getTurkishSeriesGenre(
+        @Query("with_genres") genreId: Int,
+        @Query("sort_by") sortBy: String = "popularity.desc",
+        @Query("page") page: Int = 1,
+        @Query("with_original_language") language: String = "tr"
+    ): Call<SeriesResponse>
+
+    @GET("/3/discover/tv?$API_KEY")
+    fun getSeriesByGenreAndPage(
+        @Query("with_genres") genreId: Int,
+        @Query("page") page: Int,
+        @Query("sort_by") sortBy: String = "popularity.desc"
+    ): Call<SeriesResponse>
+
+//GenreSeries
 
     //Action Movies
     @GET("/3/discover/movie?$API_KEY")

@@ -84,10 +84,10 @@ class MainFragment : Fragment(), MovieAdapter.OnItemClickListener {
         navView.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.nav_movies -> {
-                    // Ana listeyi göster
+                    (activity as? MainActivity)?.showMainList()
                 }
                 R.id.nav_series -> {
-                    // Dizi listesini göster
+                    (activity as? MainActivity)?.showSeriesList()
                 }
             }
             drawerLayout.closeDrawer(GravityCompat.START)

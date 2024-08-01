@@ -7,9 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.xsoftware.movieapplication.databinding.FragmentSeriesBinding
+import com.xsoftware.movieapplication.models.Genre
 import com.xsoftware.movieapplication.models.Series
 import com.xsoftware.movieapplication.models.SeriesResponse
 import com.xsoftware.movieapplication.services.MovieApiInterface
@@ -38,6 +40,9 @@ class SeriesFragment : Fragment(), SeriesAdapter.OnItemClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val backButton : ImageView = view.findViewById(R.id.back_button)
+        backButton.visibility = View.GONE
+
 
         binding.rvPopularSeries.layoutManager = LinearLayoutManager(view.context, RecyclerView.HORIZONTAL, false)
         binding.rvPopularSeries.setHasFixedSize(true)
@@ -52,6 +57,10 @@ class SeriesFragment : Fragment(), SeriesAdapter.OnItemClickListener {
         binding.rvAiringTodaySeries.setHasFixedSize(true)
 
         getSeriesData()
+
+        binding.catagoriesButton.setOnClickListener {
+            (activity as? MainActivity)?.showCategorySeries()
+        }
     }
 
     private fun getSeriesData() {

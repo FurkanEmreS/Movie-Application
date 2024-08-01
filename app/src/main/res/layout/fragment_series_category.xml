@@ -23,6 +23,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+
             <include
                 android:id="@+id/toolbar"
                 layout="@layout/toolbar" />
@@ -80,7 +81,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="6dp"
                 android:fontFamily="serif"
-                android:text="On The Air"
+                android:text="Upcoming Series"
                 android:textColor="@color/black"
                 android:textStyle="bold" />
 
@@ -97,7 +98,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="6dp"
                 android:fontFamily="serif"
-                android:text="Airing Today"
+                android:text="Turkish Series"
                 android:textColor="@color/black"
                 android:textStyle="bold" />
 
@@ -105,8 +106,23 @@
                 android:id="@+id/rv_airing_today_series"
                 android:layout_width="match_parent"
                 android:layout_height="136dp" />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:backgroundTint="@color/black"
+                android:textColor="@color/white"
+                android:text="View All"
+                android:id="@+id/viewAllSeriesButton"
+
+                >
+
+            </Button>
         </LinearLayout>
+
+
 
     </androidx.core.widget.NestedScrollView>
 
 </LinearLayout>
+

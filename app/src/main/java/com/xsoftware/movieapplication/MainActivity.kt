@@ -14,6 +14,7 @@ import com.google.android.material.navigation.NavigationView
 import com.xsoftware.movieapplication.models.Movie
 import com.xsoftware.movieapplication.models.Series
 import androidx.appcompat.widget.Toolbar
+import com.xsoftware.movieapplication.models.Genre
 
 
 class MainActivity : AppCompatActivity() {
@@ -38,6 +39,33 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.commit {
             setReorderingAllowed(true)
             add<MainFragment>(R.id.fragmentContainerView)
+            addToBackStack(null)
+        }
+    }
+
+    fun showCategorySeries() {
+        supportFragmentManager.commit {
+            setReorderingAllowed(true)
+            replace<CategorySeriesFragment>(R.id.fragmentContainerView)
+            addToBackStack(null) // Geri butonu ile geri dönüş sağlanabilir
+        }
+    }
+
+    fun showSeriesCategory(genre: Genre) {
+        val bundle = bundleOf("genreId" to genre.id)
+        supportFragmentManager.commit {
+            setReorderingAllowed(true)
+            replace<SeriesCategoryFragment>(R.id.fragmentContainerView, args = bundle)
+            addToBackStack(null)
+        }
+    }
+
+
+    fun showAllSeriesCategory(genreId: Int) {
+        val bundle = bundleOf("genreId" to genreId)
+        supportFragmentManager.commit {
+            setReorderingAllowed(true)
+            replace<AllSeriesCategoryFragment>(R.id.fragmentContainerView, args = bundle)
             addToBackStack(null)
         }
     }
@@ -172,6 +200,8 @@ class MainActivity : AppCompatActivity() {
             //  addToBackStack(null)
         }
     }
+
+
 
     override fun onBackPressed() {
         if (supportFragmentManager.backStackEntryCount == 1) {
