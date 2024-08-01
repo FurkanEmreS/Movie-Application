@@ -137,6 +137,51 @@ interface MovieApiInterface {
 
 //GenreSeries
 
+
+    //Genre Movies
+    @GET("/3/genre/movie/list?$API_KEY")
+    fun getMovieGenres(): Call<GenreResponse>
+
+    @GET("/3/discover/movie?$API_KEY")
+    fun getMoviesByGenre(
+        @Query("with_genres") genreId: Int,
+        @Query("sort_by") sortBy: String = "popularity.desc",
+        @Query("page") page: Int = 1
+    ): Call<MovieResponse>
+
+    @GET("/3/discover/movie?$API_KEY")
+    fun getPopularMoviesGenre(
+        @Query("with_genres") genreId: Int,
+        @Query("sort_by") sortBy: String = "popularity.desc",
+        @Query("page") page: Int = 1
+    ): Call<MovieResponse>
+
+    @GET("/3/discover/movie?$API_KEY")
+    fun getTopRatedMoviesGenre(
+        @Query("with_genres") genreId: Int,
+        @Query("sort_by") sortBy: String = "vote_count.desc",
+        @Query("page") page: Int = 1
+    ): Call<MovieResponse>
+
+    @GET("/3/discover/movie?$API_KEY")
+    fun getUpcomingMoviesGenre(
+        @Query("with_genres") genreId: Int,
+        @Query("sort_by") sortBy: String = "release_date.desc",
+        @Query("page") page: Int = 1
+    ): Call<MovieResponse>
+
+    @GET("/3/discover/movie?$API_KEY")
+    fun getMoviesByGenreAndPage(
+        @Query("with_genres") genreId: Int,
+        @Query("page") page: Int,
+        @Query("sort_by") sortBy: String = "popularity.desc"
+    ): Call<MovieResponse>
+
+
+
+
+    //Genre Movies
+
     //Action Movies
     @GET("/3/discover/movie?$API_KEY")
     fun getPopularActiconMovies(

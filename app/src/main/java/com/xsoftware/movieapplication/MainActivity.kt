@@ -43,6 +43,15 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+
+    fun showCategoryMovie() {
+        supportFragmentManager.commit {
+            setReorderingAllowed(true)
+            replace<CategoryMovieFragment>(R.id.fragmentContainerView)
+            addToBackStack(null) // Geri butonu ile geri dönüş sağlanabilir
+        }
+    }
+
     fun showCategorySeries() {
         supportFragmentManager.commit {
             setReorderingAllowed(true)
@@ -60,12 +69,31 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    fun showMoviesCategory(genre: Genre) {
+        val bundle = bundleOf("genreId" to genre.id)
+        supportFragmentManager.commit {
+            setReorderingAllowed(true)
+            replace<MovieCategoryFragment>(R.id.fragmentContainerView, args = bundle)
+            addToBackStack(null)
+        }
+    }
+
 
     fun showAllSeriesCategory(genreId: Int) {
         val bundle = bundleOf("genreId" to genreId)
         supportFragmentManager.commit {
             setReorderingAllowed(true)
             replace<AllSeriesCategoryFragment>(R.id.fragmentContainerView, args = bundle)
+            addToBackStack(null)
+        }
+    }
+
+
+    fun showAllMovieCategory(genreId: Int) {
+        val bundle = bundleOf("genreId" to genreId)
+        supportFragmentManager.commit {
+            setReorderingAllowed(true)
+            replace<AllMoviesCategoryFragment>(R.id.fragmentContainerView, args = bundle)
             addToBackStack(null)
         }
     }

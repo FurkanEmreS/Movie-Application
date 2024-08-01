@@ -3,19 +3,19 @@ package com.xsoftware.movieapplication
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.xsoftware.movieapplication.databinding.SeriesCategoryItemBinding
+import com.xsoftware.movieapplication.databinding.CategoryItemBinding
 import com.xsoftware.movieapplication.models.Genre
 
-class CategoryAdapter(
+class MovieCategoryAdapter(
     private val genres: List<Genre>,
     private val listener: OnItemClickListener
-) : RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>() {
+) : RecyclerView.Adapter<MovieCategoryAdapter.CategoryViewHolder>() {
 
     interface OnItemClickListener {
         fun onItemClick(genre: Genre)
     }
 
-    class CategoryViewHolder(private val binding: SeriesCategoryItemBinding) : RecyclerView.ViewHolder(binding.root) {
+    class CategoryViewHolder(private val binding: CategoryItemBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bindCategory(genre: Genre, listener: OnItemClickListener) {
             binding.categoryName.text = genre.name
             binding.root.setOnClickListener { listener.onItemClick(genre) }
@@ -23,7 +23,7 @@ class CategoryAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
-        val binding = SeriesCategoryItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = CategoryItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return CategoryViewHolder(binding)
     }
 

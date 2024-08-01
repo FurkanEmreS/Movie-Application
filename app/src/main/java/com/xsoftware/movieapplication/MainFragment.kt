@@ -95,7 +95,7 @@ class MainFragment : Fragment(), MovieAdapter.OnItemClickListener {
         }
 
         binding.catagoriesButton.setOnClickListener {
-            (activity as? MainActivity)?.showCategories()
+            (activity as? MainActivity)?.showCategoryMovie()
         }
 
         setupRecyclerViews()
