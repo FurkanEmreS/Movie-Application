@@ -99,7 +99,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginBottom="6dp"
         android:fontFamily="serif"
-        android:text="Upcoming Movies"
+        android:text="Turkish Movies"
         android:textColor="@color/black"
         android:textStyle="bold" />
 
