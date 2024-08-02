@@ -78,7 +78,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun showSeriesCategory(genre: Genre) {
-        val bundle = bundleOf("genreId" to genre.id)
+        val bundle = bundleOf("genreId" to genre.id, "genreName" to genre.name)
         supportFragmentManager.commit {
             setReorderingAllowed(true)
             replace<SeriesCategoryFragment>(R.id.fragmentContainerView, args = bundle)
@@ -87,7 +87,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun showMoviesCategory(genre: Genre) {
-        val bundle = bundleOf("genreId" to genre.id)
+        val bundle = bundleOf("genreId" to genre.id, "genreName" to genre.name)
         supportFragmentManager.commit {
             setReorderingAllowed(true)
             replace<MovieCategoryFragment>(R.id.fragmentContainerView, args = bundle)

@@ -7,10 +7,34 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".fragments.MovieCategoryFragment">
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:fillViewport="true"
+        android:layout_gravity="fill_vertical">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
     <include
         android:id="@+id/toolbar"
         layout="@layout/toolbar" />
+
+
+    <Button
+        android:id="@+id/catagoriesButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="@color/black"
+        android:text="Catagories"
+        android:textSize="10sp"/>
 
 
 
@@ -66,6 +90,24 @@
         android:layout_width="match_parent"
         android:layout_height="136dp" />
 
+
+    <TextView
+        android:id="@+id/turkishMovies"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="6dp"
+        android:fontFamily="serif"
+        android:text="Upcoming Movies"
+        android:textColor="@color/black"
+        android:textStyle="bold" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_turkish_movies"
+        android:layout_width="match_parent"
+        android:layout_height="136dp" />
+
     <Button
         android:id="@+id/viewAllMoviesButton"
         android:layout_width="wrap_content"
@@ -74,4 +116,9 @@
         android:backgroundTint="@color/black"
         android:textColor="@color/white"
         android:text="View All" />
+
+    </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
 </LinearLayout>

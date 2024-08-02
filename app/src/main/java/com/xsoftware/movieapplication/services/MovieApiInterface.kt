@@ -176,6 +176,14 @@ interface MovieApiInterface {
         @Query("sort_by") sortBy: String = "popularity.desc"
     ): Call<MovieResponse>
 
+    @GET("/3/discover/movie?$API_KEY")
+    fun getTurkishMoviesGenre(
+        @Query("with_genres") genreId: Int,
+        @Query("sort_by") sortBy: String = "popularity.desc",
+        @Query("page") page: Int = 1,
+        @Query("with_original_language") language: String = "tr"
+    ): Call<MovieResponse>
+
 
 
 

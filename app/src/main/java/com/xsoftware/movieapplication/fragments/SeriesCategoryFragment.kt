@@ -25,11 +25,14 @@ class SeriesCategoryFragment : Fragment(), SeriesAdapter.OnItemClickListener {
 
     private lateinit var binding: FragmentSeriesCategoryBinding
     private var genreId: Int = 0
+    private var genreName: String = ""
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             genreId = it.getInt("genreId", 0)
+            genreName = it.getString("genreName", "")
         }
     }
 
@@ -70,6 +73,12 @@ class SeriesCategoryFragment : Fragment(), SeriesAdapter.OnItemClickListener {
         binding.rvAiringTodaySeries.setHasFixedSize(true)
 
         getSeriesData()
+
+        binding.catagoriesButton.setOnClickListener {
+            (activity as? MainActivity)?.showCategorySeries()
+        }
+
+        binding.catagoriesButton.text = genreName
     }
 
     private fun getSeriesData() {

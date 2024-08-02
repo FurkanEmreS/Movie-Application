@@ -26,11 +26,13 @@ class MovieCategoryFragment : Fragment(), MovieAdapter.OnItemClickListener {
 
     private lateinit var binding: FragmentMovieCategoryBinding
     private var genreId: Int = 0
+    private var genreName: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             genreId = it.getInt("genreId", 0)
+            genreName = it.getString("genreName", "")
         }
     }
 
@@ -66,6 +68,15 @@ class MovieCategoryFragment : Fragment(), MovieAdapter.OnItemClickListener {
         binding.rvUpcomingMovies.layoutManager = LinearLayoutManager(view.context, RecyclerView.HORIZONTAL, false)
         binding.rvUpcomingMovies.setHasFixedSize(true)
 
+        binding.rvTurkishMovies.layoutManager = LinearLayoutManager(view.context, RecyclerView.HORIZONTAL, false)
+        binding.rvTurkishMovies.setHasFixedSize(true)
+
+        binding.catagoriesButton.setOnClickListener {
+            (activity as? MainActivity)?.showCategoryMovie()
+        }
+
+        binding.catagoriesButton.text = genreName
+
         getMoviesData()
     }
 
@@ -73,6 +84,7 @@ class MovieCategoryFragment : Fragment(), MovieAdapter.OnItemClickListener {
         getPopularMovies { movies -> binding.rvPopularMovies.adapter = MovieAdapter(movies.toMutableList(), this) }
         getTopRatedMovies { movies -> binding.rvTopRatedMovies.adapter = MovieAdapter(movies.toMutableList(), this) }
         getUpcomingMovies { movies -> binding.rvUpcomingMovies.adapter = MovieAdapter(movies.toMutableList(), this) }
+        getTurkishMovies { movies -> binding.rvTurkishMovies.adapter = MovieAdapter(movies.toMutableList(), this) }
     }
 
     private fun getPopularMovies(callback: (List<Movie>) -> Unit) {
@@ -117,6 +129,24 @@ class MovieCategoryFragment : Fragment(), MovieAdapter.OnItemClickListener {
             override fun onFailure(call: Call<MovieResponse>, t: Throwable) {
                 // Hata durumunu yönet
                 Log.e("MovieCategoryFragment", "Yaklaşan filmler yüklenemedi: ${t.message}")
+            }
+
+            override fun onResponse(call: Call<MovieResponse>, response: Response<MovieResponse>) {
+                response.body()?.movies?.let { movieList ->
+                    callback(movieList)
+                } ?: run {
+                    Log.e("MovieCategoryFragment", "Boş yanıt alındı")
+                }
+            }
+        })
+    }
+
+    private fun getTurkishMovies(callback: (List<Movie>) -> Unit) {
+        val apiService = MovieApiService.getInstance(requireContext()).create(MovieApiInterface::class.java)
+        apiService.getTurkishMoviesGenre(genreId).enqueue(object : Callback<MovieResponse> {
+            override fun onFailure(call: Call<MovieResponse>, t: Throwable) {
+                // Hata durumunu yönet
+                Log.e("MovieCategoryFragment", "Türk filmleri yüklenemedi: ${t.message}")
             }
 
             override fun onResponse(call: Call<MovieResponse>, response: Response<MovieResponse>) {
