@@ -1,4 +1,4 @@
-package com.xsoftware.movieapplication
+package com.xsoftware.movieapplication.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,7 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.xsoftware.movieapplication.databinding.FragmentCategoryMovieBinding
+import com.xsoftware.movieapplication.MainActivity
+import com.xsoftware.movieapplication.adapters.SeriesCategoryAdapter
+import com.xsoftware.movieapplication.databinding.FragmentCategorySeriesBinding
 import com.xsoftware.movieapplication.models.Genre
 import com.xsoftware.movieapplication.models.GenreResponse
 import com.xsoftware.movieapplication.services.MovieApiInterface
@@ -15,16 +17,15 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+class CategorySeriesFragment : Fragment(), SeriesCategoryAdapter.OnItemClickListener {
 
-class CategoryMovieFragment : Fragment(), MovieCategoryAdapter.OnItemClickListener {
-
-    private lateinit var binding: FragmentCategoryMovieBinding
+    private lateinit var binding: FragmentCategorySeriesBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentCategoryMovieBinding.inflate(inflater, container, false)
+        binding = FragmentCategorySeriesBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -41,10 +42,10 @@ class CategoryMovieFragment : Fragment(), MovieCategoryAdapter.OnItemClickListen
 
     private fun fetchGenres() {
         val apiService = MovieApiService.getInstance(requireContext()).create(MovieApiInterface::class.java)
-        apiService.getMovieGenres().enqueue(object : Callback<GenreResponse> {
+        apiService.getTvGenres().enqueue(object : Callback<GenreResponse> {
             override fun onResponse(call: Call<GenreResponse>, response: Response<GenreResponse>) {
                 val genres = response.body()?.genres ?: emptyList()
-                binding.categoryRecyclerView.adapter = MovieCategoryAdapter(genres, this@CategoryMovieFragment)
+                binding.categoryRecyclerView.adapter = SeriesCategoryAdapter(genres, this@CategorySeriesFragment)
             }
 
             override fun onFailure(call: Call<GenreResponse>, t: Throwable) {
@@ -54,6 +55,6 @@ class CategoryMovieFragment : Fragment(), MovieCategoryAdapter.OnItemClickListen
     }
 
     override fun onItemClick(genre: Genre) {
-        (activity as? MainActivity)?.showMoviesCategory(genre)
+        (activity as? MainActivity)?.showSeriesCategory(genre)
     }
 }

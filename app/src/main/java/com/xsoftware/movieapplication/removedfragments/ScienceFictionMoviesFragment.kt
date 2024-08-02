@@ -1,4 +1,4 @@
-package com.xsoftware.movieapplication
+package com.xsoftware.movieapplication.removedfragments
 
 import android.os.Bundle
 import android.util.Log
@@ -9,8 +9,10 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.xsoftware.movieapplication.databinding.FragmentAnimationMoviesBinding
-import com.xsoftware.movieapplication.databinding.FragmentHorrorMoviesBinding
+import com.xsoftware.movieapplication.MainActivity
+import com.xsoftware.movieapplication.R
+import com.xsoftware.movieapplication.adapters.MovieAdapter
+import com.xsoftware.movieapplication.databinding.FragmentScienceFictionMoviesBinding
 import com.xsoftware.movieapplication.models.Movie
 import com.xsoftware.movieapplication.models.MovieResponse
 import com.xsoftware.movieapplication.services.MovieApiInterface
@@ -19,8 +21,9 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class AnimationMoviesFragment : Fragment() ,MovieAdapter.OnItemClickListener{
-    private lateinit var binding: FragmentAnimationMoviesBinding
+
+class ScienceFictionMoviesFragment : Fragment(), MovieAdapter.OnItemClickListener {
+    private lateinit var binding: FragmentScienceFictionMoviesBinding
 
 
     override fun onItemClick(movie: Movie) {
@@ -32,7 +35,7 @@ class AnimationMoviesFragment : Fragment() ,MovieAdapter.OnItemClickListener{
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentAnimationMoviesBinding.inflate(inflater, container, false)
+        binding = FragmentScienceFictionMoviesBinding.inflate(inflater, container, false)
         return binding.root
 
     }
@@ -50,21 +53,21 @@ class AnimationMoviesFragment : Fragment() ,MovieAdapter.OnItemClickListener{
         }
 
 
-        binding.rvPopularAnimationMovies.layoutManager =
+        binding.rvPopularScienceFictionMovies.layoutManager =
             LinearLayoutManager(view.context, RecyclerView.HORIZONTAL, false)
-        binding.rvPopularAnimationMovies.setHasFixedSize(true)
+        binding.rvPopularScienceFictionMovies.setHasFixedSize(true)
 
-        binding.rvUpcomingAnimationMovies.layoutManager =
+        binding.rvUpcomingScienceFictionMovies.layoutManager =
             LinearLayoutManager(view.context, RecyclerView.HORIZONTAL, false)
-        binding.rvUpcomingAnimationMovies.setHasFixedSize(true)
+        binding.rvUpcomingScienceFictionMovies.setHasFixedSize(true)
 
-        binding.rvTopRatedAnimationMovies.layoutManager =
+        binding.rvTopRatedScienceFictionMovies.layoutManager =
             LinearLayoutManager(view.context, RecyclerView.HORIZONTAL, false)
-        binding.rvTopRatedAnimationMovies.setHasFixedSize(true)
+        binding.rvTopRatedScienceFictionMovies.setHasFixedSize(true)
 
-        binding.rvTurkishAnimationMovies.layoutManager =
+        binding.rvTurkishScienceFictionMovies.layoutManager =
             LinearLayoutManager(view.context, RecyclerView.HORIZONTAL, false)
-        binding.rvTurkishAnimationMovies.setHasFixedSize(true)
+        binding.rvTopRatedScienceFictionMovies.setHasFixedSize(true)
 
 
 
@@ -77,27 +80,27 @@ class AnimationMoviesFragment : Fragment() ,MovieAdapter.OnItemClickListener{
     }
 
     private fun getBothMovieData() {
-        getPopularAnimationMovies { movies ->
-            binding.rvPopularAnimationMovies.adapter = MovieAdapter(movies.toMutableList(), this)
+        getPopularScienceFictionMovies { movies ->
+            binding.rvPopularScienceFictionMovies.adapter = MovieAdapter(movies.toMutableList(), this)
         }
-        getUpComingAnimationMovies { movies ->
-            binding.rvUpcomingAnimationMovies.adapter = MovieAdapter(movies.toMutableList(), this)
+        getUpComingScienceFictionMovies { movies ->
+            binding.rvUpcomingScienceFictionMovies.adapter = MovieAdapter(movies.toMutableList(), this)
         }
-        getTopRatedAnimationMovies { movies ->
-            binding.rvTopRatedAnimationMovies.adapter = MovieAdapter(movies.toMutableList(), this)
+        getTopRatedScienceFictionMovies { movies ->
+            binding.rvTopRatedScienceFictionMovies.adapter = MovieAdapter(movies.toMutableList(), this)
         }
-        getTurkishAnimationMovies { movies ->
-            binding.rvTurkishAnimationMovies.adapter = MovieAdapter(movies.toMutableList(), this)
+        getTurkishScienceFictionMovies { movies ->
+            binding.rvTurkishScienceFictionMovies.adapter = MovieAdapter(movies.toMutableList(), this)
         }
     }
 
 
 
 
-    private fun getPopularAnimationMovies(callback: (List<Movie>) -> Unit) {
+    private fun getPopularScienceFictionMovies(callback: (List<Movie>) -> Unit) {
         val apiService =
             MovieApiService.getInstance(requireContext()).create(MovieApiInterface::class.java)
-        apiService.getPopularAnimationMovies().enqueue(object : Callback<MovieResponse> {
+        apiService.getPopularScienceFictionMovies().enqueue(object : Callback<MovieResponse> {
             override fun onFailure(call: Call<MovieResponse>, t: Throwable) {}
             override fun onResponse(call: Call<MovieResponse>, response: Response<MovieResponse>) {
                 callback(response.body()!!.movies)
@@ -105,22 +108,10 @@ class AnimationMoviesFragment : Fragment() ,MovieAdapter.OnItemClickListener{
         })
     }
 
-    private fun getTopRatedAnimationMovies(callback: (List<Movie>) -> Unit) {
+    private fun getTopRatedScienceFictionMovies(callback: (List<Movie>) -> Unit) {
         val apiService =
             MovieApiService.getInstance(requireContext()).create(MovieApiInterface::class.java)
-        apiService.getTopRatedAnimationMovies().enqueue(object : Callback<MovieResponse> {
-            override fun onResponse(call: Call<MovieResponse>, response: Response<MovieResponse>) {
-                callback(response.body()!!.movies)
-            }
-
-            override fun onFailure(call: Call<MovieResponse>, t: Throwable) {}
-        })
-    }
-
-    private fun getUpComingAnimationMovies(callback: (List<Movie>) -> Unit) {
-        val apiService =
-            MovieApiService.getInstance(requireContext()).create(MovieApiInterface::class.java)
-        apiService.getUpComingAnimationMovies().enqueue(object : Callback<MovieResponse> {
+        apiService.getTopRatedScienceFictionMovies().enqueue(object : Callback<MovieResponse> {
             override fun onResponse(call: Call<MovieResponse>, response: Response<MovieResponse>) {
                 callback(response.body()!!.movies)
             }
@@ -129,10 +120,22 @@ class AnimationMoviesFragment : Fragment() ,MovieAdapter.OnItemClickListener{
         })
     }
 
-    private fun getTurkishAnimationMovies(callback: (List<Movie>) -> Unit) {
+    private fun getUpComingScienceFictionMovies(callback: (List<Movie>) -> Unit) {
         val apiService =
             MovieApiService.getInstance(requireContext()).create(MovieApiInterface::class.java)
-        apiService.getTurkishAnimationMovies().enqueue(object : Callback<MovieResponse> {
+        apiService.getUpComingScienceFictionMovies().enqueue(object : Callback<MovieResponse> {
+            override fun onResponse(call: Call<MovieResponse>, response: Response<MovieResponse>) {
+                callback(response.body()!!.movies)
+            }
+
+            override fun onFailure(call: Call<MovieResponse>, t: Throwable) {}
+        })
+    }
+
+    private fun getTurkishScienceFictionMovies(callback: (List<Movie>) -> Unit) {
+        val apiService =
+            MovieApiService.getInstance(requireContext()).create(MovieApiInterface::class.java)
+        apiService.getTurkishScienceFictionMovies().enqueue(object : Callback<MovieResponse> {
             override fun onResponse(call: Call<MovieResponse>, response: Response<MovieResponse>) {
                 callback(response.body()!!.movies)
             }

@@ -1,16 +1,17 @@
-package com.xsoftware.movieapplication
+package com.xsoftware.movieapplication.removedfragments
 
 import android.os.Bundle
 import android.os.Parcelable
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.ProgressBar
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.xsoftware.movieapplication.databinding.FragmentAllMoviesCategoryBinding
+import com.xsoftware.movieapplication.MainActivity
+import com.xsoftware.movieapplication.R
+import com.xsoftware.movieapplication.adapters.MovieAdapter
 import com.xsoftware.movieapplication.models.Movie
 import com.xsoftware.movieapplication.models.MovieResponse
 import com.xsoftware.movieapplication.services.MovieApiInterface
@@ -19,59 +20,42 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+class FullActionMoviesFragment : Fragment(), MovieAdapter.OnItemClickListener {
 
-class AllMoviesCategoryFragment : Fragment(), MovieAdapter.OnItemClickListener {
-
-    private lateinit var binding: FragmentAllMoviesCategoryBinding
     private lateinit var recyclerView: RecyclerView
     private lateinit var progressBar: ProgressBar
     private lateinit var adapter: MovieAdapter
     private var isLoading = false
     private var currentPage = 1
-    private val totalPage = 6
-    private val movieList = mutableListOf<Movie>()
+    private val totalPage = 5
+    private val moviesList = mutableListOf<Movie>()
     private var layoutManagerState: Parcelable? = null
-    private var genreId: Int = 0
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            genreId = it.getInt("genreId", 0)
-        }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentAllMoviesCategoryBinding.inflate(inflater, container, false)
-        recyclerView = binding.recyclerView
-        progressBar = binding.progressBar
-        return binding.root
+        val view = inflater.inflate(R.layout.fragment_full_action_movies, container, false)
+        recyclerView = view.findViewById(R.id.recyclerView)
+        progressBar = view.findViewById(R.id.progressBar)
+        return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        adapter = MovieAdapter(movieList, this)
+        adapter = MovieAdapter(moviesList, this)
         val layoutManager = GridLayoutManager(context, 3)
         recyclerView.layoutManager = layoutManager
         recyclerView.adapter = adapter
-
-        val toolbarImage: ImageView = view.findViewById(R.id.iv_logo)
-        toolbarImage.visibility = View.GONE
-        val backButton: ImageView = view.findViewById(R.id.back_button)
-        backButton.setOnClickListener {
-            (activity as? MainActivity)?.popBackStack()
-        }
 
         // Durum geri yükleme
         if (savedInstanceState != null) {
             currentPage = savedInstanceState.getInt("currentPage", 1)
             layoutManagerState = savedInstanceState.getParcelable("layoutManagerState")
-            val savedMovieList: List<Movie>? = savedInstanceState.getParcelableArrayList("movieList")
-            if (savedMovieList != null) {
-                movieList.addAll(savedMovieList)
+            val savedMoviesList: List<Movie>? = savedInstanceState.getParcelableArrayList("moviesList")
+            if (savedMoviesList != null) {
+                moviesList.addAll(savedMoviesList)
                 adapter.notifyDataSetChanged()
             }
         } else {
@@ -98,7 +82,7 @@ class AllMoviesCategoryFragment : Fragment(), MovieAdapter.OnItemClickListener {
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         outState.putInt("currentPage", currentPage)
-        outState.putParcelableArrayList("movieList", ArrayList(movieList))
+        outState.putParcelableArrayList("moviesList", ArrayList(moviesList))
         outState.putParcelable("layoutManagerState", recyclerView.layoutManager?.onSaveInstanceState())
     }
 
@@ -110,16 +94,16 @@ class AllMoviesCategoryFragment : Fragment(), MovieAdapter.OnItemClickListener {
     }
 
     private fun loadMovies() {
-        if (movieList.isEmpty()) {
+        if (moviesList.isEmpty()) {
             isLoading = true
             progressBar.visibility = View.VISIBLE
 
             val apiService = MovieApiService.getInstance(requireContext()).create(MovieApiInterface::class.java)
-            apiService.getMoviesByGenreAndPage(genreId, currentPage).enqueue(object : Callback<MovieResponse> {
+            apiService.getActionMovies(page = currentPage).enqueue(object : Callback<MovieResponse> {
                 override fun onResponse(call: Call<MovieResponse>, response: Response<MovieResponse>) {
                     progressBar.visibility = View.GONE
-                    val movies = response.body()?.movies?.filter { it.poster != null && it.poster.isNotEmpty() } ?: emptyList()
-                    movieList.addAll(movies)
+                    val movies = response.body()?.movies ?: emptyList()
+                    moviesList.addAll(movies)
                     adapter.notifyDataSetChanged()
                     isLoading = false
                 }
@@ -137,11 +121,11 @@ class AllMoviesCategoryFragment : Fragment(), MovieAdapter.OnItemClickListener {
         progressBar.visibility = View.VISIBLE
 
         val apiService = MovieApiService.getInstance(requireContext()).create(MovieApiInterface::class.java)
-        apiService.getMoviesByGenreAndPage(genreId, currentPage).enqueue(object : Callback<MovieResponse> {
+        apiService.getActionMovies(page = currentPage).enqueue(object : Callback<MovieResponse> {
             override fun onResponse(call: Call<MovieResponse>, response: Response<MovieResponse>) {
                 progressBar.visibility = View.GONE
-                val movies = response.body()?.movies?.filter { it.poster != null && it.poster.isNotEmpty() } ?: emptyList()
-                movieList.addAll(movies)
+                val movies = response.body()?.movies ?: emptyList()
+                moviesList.addAll(movies)
                 adapter.notifyDataSetChanged()
                 isLoading = false
             }
@@ -154,6 +138,8 @@ class AllMoviesCategoryFragment : Fragment(), MovieAdapter.OnItemClickListener {
     }
 
     override fun onItemClick(movie: Movie) {
-        (activity as? MainActivity)?.addMovieDetail(movie)
+        (activity as? MainActivity)?.apply {
+            addMovieDetail(movie)
+        }
     }
 }

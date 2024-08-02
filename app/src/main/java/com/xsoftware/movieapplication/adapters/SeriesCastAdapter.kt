@@ -1,11 +1,11 @@
-package com.xsoftware.movieapplication
+package com.xsoftware.movieapplication.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.xsoftware.movieapplication.services.APIConstants
 import com.xsoftware.movieapplication.databinding.ProfileCardBinding
-import com.xsoftware.movieapplication.models.MovieCast
 import com.xsoftware.movieapplication.models.SeriesCast
 
 class SeriesCastAdapter(

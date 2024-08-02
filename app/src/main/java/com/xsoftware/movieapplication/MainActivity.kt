@@ -1,20 +1,37 @@
 package com.xsoftware.movieapplication
 
 import android.os.Bundle
-import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
-import androidx.core.view.GravityCompat
-import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.add
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
-import com.google.android.material.navigation.NavigationView
 import com.xsoftware.movieapplication.models.Movie
 import com.xsoftware.movieapplication.models.Series
-import androidx.appcompat.widget.Toolbar
+import com.xsoftware.movieapplication.fragments.AllMoviesCategoryFragment
+import com.xsoftware.movieapplication.fragments.AllSeriesCategoryFragment
+import com.xsoftware.movieapplication.fragments.CategoryMovieFragment
+import com.xsoftware.movieapplication.fragments.CategorySeriesFragment
+import com.xsoftware.movieapplication.fragments.MainFragment
+import com.xsoftware.movieapplication.fragments.MovieCategoryFragment
+import com.xsoftware.movieapplication.fragments.MovieDetailFragment
+import com.xsoftware.movieapplication.fragments.SeriesCategoryFragment
+import com.xsoftware.movieapplication.fragments.SeriesDetailFragment
+import com.xsoftware.movieapplication.fragments.SeriesFragment
 import com.xsoftware.movieapplication.models.Genre
+import com.xsoftware.movieapplication.removedfragments.ActionMoviesFragment
+import com.xsoftware.movieapplication.removedfragments.AnimationMoviesFragment
+import com.xsoftware.movieapplication.removedfragments.CategoriesFragment
+import com.xsoftware.movieapplication.removedfragments.ComedyMoviesFragment
+import com.xsoftware.movieapplication.removedfragments.CrimeMoviesFragment
+import com.xsoftware.movieapplication.removedfragments.DramaMoviesFragment
+import com.xsoftware.movieapplication.removedfragments.FantasyMoviesFragment
+import com.xsoftware.movieapplication.removedfragments.FullActionMoviesFragment
+import com.xsoftware.movieapplication.removedfragments.HorrorMoviesFragment
+import com.xsoftware.movieapplication.removedfragments.RomanceMoviesFragment
+import com.xsoftware.movieapplication.removedfragments.ScienceFictionMoviesFragment
+import com.xsoftware.movieapplication.removedfragments.TurkishMoviesFragment
 
 
 class MainActivity : AppCompatActivity() {

@@ -1,4 +1,4 @@
-package com.xsoftware.movieapplication
+package com.xsoftware.movieapplication.fragments
 
 import android.os.Bundle
 import android.util.Log
@@ -7,9 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.xsoftware.movieapplication.MainActivity
+import com.xsoftware.movieapplication.R
+import com.xsoftware.movieapplication.adapters.SeriesAdapter
 import com.xsoftware.movieapplication.databinding.FragmentSeriesCategoryBinding
 import com.xsoftware.movieapplication.models.Series
 import com.xsoftware.movieapplication.models.SeriesResponse

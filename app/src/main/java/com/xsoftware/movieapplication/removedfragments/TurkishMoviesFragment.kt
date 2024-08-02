@@ -1,4 +1,4 @@
-package com.xsoftware.movieapplication
+package com.xsoftware.movieapplication.removedfragments
 
 import android.os.Bundle
 import android.util.Log
@@ -9,7 +9,10 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.xsoftware.movieapplication.databinding.FragmentRomanceMoviesBinding
+import com.xsoftware.movieapplication.MainActivity
+import com.xsoftware.movieapplication.R
+import com.xsoftware.movieapplication.adapters.MovieAdapter
+import com.xsoftware.movieapplication.databinding.FragmentTurkishMoviesBinding
 import com.xsoftware.movieapplication.models.Movie
 import com.xsoftware.movieapplication.models.MovieResponse
 import com.xsoftware.movieapplication.services.MovieApiInterface
@@ -18,9 +21,8 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-
-class RomanceMoviesFragment : Fragment(),MovieAdapter.OnItemClickListener {
-    private lateinit var binding: FragmentRomanceMoviesBinding
+class TurkishMoviesFragment : Fragment(), MovieAdapter.OnItemClickListener {
+    private lateinit var binding: FragmentTurkishMoviesBinding
 
 
     override fun onItemClick(movie: Movie) {
@@ -32,7 +34,7 @@ class RomanceMoviesFragment : Fragment(),MovieAdapter.OnItemClickListener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentRomanceMoviesBinding.inflate(inflater, container, false)
+        binding = FragmentTurkishMoviesBinding.inflate(inflater, container, false)
         return binding.root
 
     }
@@ -50,21 +52,18 @@ class RomanceMoviesFragment : Fragment(),MovieAdapter.OnItemClickListener {
         }
 
 
-        binding.rvPopularRomanceMovies.layoutManager =
+        binding.rvPopularTurkishMovies.layoutManager =
             LinearLayoutManager(view.context, RecyclerView.HORIZONTAL, false)
-        binding.rvPopularRomanceMovies.setHasFixedSize(true)
+        binding.rvPopularTurkishMovies.setHasFixedSize(true)
 
-        binding.rvUpcomingRomanceMovies.layoutManager =
+        binding.rvUpcomingTurkishMovies.layoutManager =
             LinearLayoutManager(view.context, RecyclerView.HORIZONTAL, false)
-        binding.rvUpcomingRomanceMovies.setHasFixedSize(true)
+        binding.rvUpcomingTurkishMovies.setHasFixedSize(true)
 
-        binding.rvTopRatedRomanceMovies.layoutManager =
+        binding.rvTopRatedTurkishMovies.layoutManager =
             LinearLayoutManager(view.context, RecyclerView.HORIZONTAL, false)
-        binding.rvTopRatedRomanceMovies.setHasFixedSize(true)
+        binding.rvTopRatedTurkishMovies.setHasFixedSize(true)
 
-        binding.rvTurkishRomanceMovies.layoutManager =
-            LinearLayoutManager(view.context, RecyclerView.HORIZONTAL, false)
-        binding.rvTurkishRomanceMovies.setHasFixedSize(true)
 
 
 
@@ -77,27 +76,25 @@ class RomanceMoviesFragment : Fragment(),MovieAdapter.OnItemClickListener {
     }
 
     private fun getBothMovieData() {
-        getPopularRomanceMovies { movies ->
-            binding.rvPopularRomanceMovies.adapter = MovieAdapter(movies.toMutableList(), this)
+        getPopularTurkishMovies { movies ->
+            binding.rvPopularTurkishMovies.adapter = MovieAdapter(movies.toMutableList(), this)
         }
-        getUpComingRomanceMovies { movies ->
-            binding.rvUpcomingRomanceMovies.adapter = MovieAdapter(movies.toMutableList(), this)
+        getUpComingTurkishMovies { movies ->
+            binding.rvUpcomingTurkishMovies.adapter = MovieAdapter(movies.toMutableList(), this)
         }
-        getTopRatedRomanceMovies { movies ->
-            binding.rvTopRatedRomanceMovies.adapter = MovieAdapter(movies.toMutableList(), this)
+        getTopRatedTurkishMovies { movies ->
+            binding.rvTopRatedTurkishMovies.adapter = MovieAdapter(movies.toMutableList(), this)
         }
-        getTurkishRomanceMovies { movies ->
-            binding.rvTurkishRomanceMovies.adapter = MovieAdapter(movies.toMutableList(), this)
-        }
+
     }
 
 
 
 
-    private fun getPopularRomanceMovies(callback: (List<Movie>) -> Unit) {
+    private fun getPopularTurkishMovies(callback: (List<Movie>) -> Unit) {
         val apiService =
             MovieApiService.getInstance(requireContext()).create(MovieApiInterface::class.java)
-        apiService.getPopularRomanceMovies().enqueue(object : Callback<MovieResponse> {
+        apiService.getPopularTurkishMovies().enqueue(object : Callback<MovieResponse> {
             override fun onFailure(call: Call<MovieResponse>, t: Throwable) {}
             override fun onResponse(call: Call<MovieResponse>, response: Response<MovieResponse>) {
                 callback(response.body()!!.movies)
@@ -105,22 +102,10 @@ class RomanceMoviesFragment : Fragment(),MovieAdapter.OnItemClickListener {
         })
     }
 
-    private fun getTopRatedRomanceMovies(callback: (List<Movie>) -> Unit) {
+    private fun getTopRatedTurkishMovies(callback: (List<Movie>) -> Unit) {
         val apiService =
             MovieApiService.getInstance(requireContext()).create(MovieApiInterface::class.java)
-        apiService.getTopRatedRomanceMovies().enqueue(object : Callback<MovieResponse> {
-            override fun onResponse(call: Call<MovieResponse>, response: Response<MovieResponse>) {
-                callback(response.body()!!.movies)
-            }
-
-            override fun onFailure(call: Call<MovieResponse>, t: Throwable) {}
-        })
-    }
-
-    private fun getUpComingRomanceMovies(callback: (List<Movie>) -> Unit) {
-        val apiService =
-            MovieApiService.getInstance(requireContext()).create(MovieApiInterface::class.java)
-        apiService.getUpComingRomanceMovies().enqueue(object : Callback<MovieResponse> {
+        apiService.getTopRatedTurkishMovies().enqueue(object : Callback<MovieResponse> {
             override fun onResponse(call: Call<MovieResponse>, response: Response<MovieResponse>) {
                 callback(response.body()!!.movies)
             }
@@ -129,10 +114,10 @@ class RomanceMoviesFragment : Fragment(),MovieAdapter.OnItemClickListener {
         })
     }
 
-    private fun getTurkishRomanceMovies(callback: (List<Movie>) -> Unit) {
+    private fun getUpComingTurkishMovies(callback: (List<Movie>) -> Unit) {
         val apiService =
             MovieApiService.getInstance(requireContext()).create(MovieApiInterface::class.java)
-        apiService.getTurkishRomanceMovies().enqueue(object : Callback<MovieResponse> {
+        apiService.getUpComingTurkishMovies().enqueue(object : Callback<MovieResponse> {
             override fun onResponse(call: Call<MovieResponse>, response: Response<MovieResponse>) {
                 callback(response.body()!!.movies)
             }
@@ -140,6 +125,8 @@ class RomanceMoviesFragment : Fragment(),MovieAdapter.OnItemClickListener {
             override fun onFailure(call: Call<MovieResponse>, t: Throwable) {}
         })
     }
+
+
 
 
 

@@ -1,4 +1,4 @@
-package com.xsoftware.movieapplication
+package com.xsoftware.movieapplication.adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +7,7 @@ import com.bumptech.glide.Glide
 import com.xsoftware.movieapplication.databinding.MovieBannerBinding
 import com.xsoftware.movieapplication.models.Series
 import android.view.ViewGroup
+import com.xsoftware.movieapplication.services.APIConstants
 
 class SeriesAdapter(
     private val series: List<Series>,

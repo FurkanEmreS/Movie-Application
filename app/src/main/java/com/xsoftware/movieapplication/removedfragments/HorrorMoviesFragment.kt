@@ -1,4 +1,4 @@
-package com.xsoftware.movieapplication
+package com.xsoftware.movieapplication.removedfragments
 
 import android.os.Bundle
 import android.util.Log
@@ -9,7 +9,10 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.xsoftware.movieapplication.databinding.FragmentCrimeMoviesBinding
+import com.xsoftware.movieapplication.MainActivity
+import com.xsoftware.movieapplication.R
+import com.xsoftware.movieapplication.adapters.MovieAdapter
+import com.xsoftware.movieapplication.databinding.FragmentHorrorMoviesBinding
 import com.xsoftware.movieapplication.models.Movie
 import com.xsoftware.movieapplication.models.MovieResponse
 import com.xsoftware.movieapplication.services.MovieApiInterface
@@ -19,8 +22,8 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-class CrimeMoviesFragment : Fragment(),MovieAdapter.OnItemClickListener {
-    private lateinit var binding: FragmentCrimeMoviesBinding
+class HorrorMoviesFragment : Fragment() , MovieAdapter.OnItemClickListener{
+    private lateinit var binding: FragmentHorrorMoviesBinding
 
 
     override fun onItemClick(movie: Movie) {
@@ -32,7 +35,7 @@ class CrimeMoviesFragment : Fragment(),MovieAdapter.OnItemClickListener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentCrimeMoviesBinding.inflate(inflater, container, false)
+        binding = FragmentHorrorMoviesBinding.inflate(inflater, container, false)
         return binding.root
 
     }
@@ -50,21 +53,21 @@ class CrimeMoviesFragment : Fragment(),MovieAdapter.OnItemClickListener {
         }
 
 
-        binding.rvPopularCrimeMovies.layoutManager =
+        binding.rvPopularHorrorMovies.layoutManager =
             LinearLayoutManager(view.context, RecyclerView.HORIZONTAL, false)
-        binding.rvPopularCrimeMovies.setHasFixedSize(true)
+        binding.rvPopularHorrorMovies.setHasFixedSize(true)
 
-        binding.rvUpcomingCrimeMovies.layoutManager =
+        binding.rvUpcomingHorrorMovies.layoutManager =
             LinearLayoutManager(view.context, RecyclerView.HORIZONTAL, false)
-        binding.rvUpcomingCrimeMovies.setHasFixedSize(true)
+        binding.rvUpcomingHorrorMovies.setHasFixedSize(true)
 
-        binding.rvTopRatedCrimeMovies.layoutManager =
+        binding.rvTopRatedHorrorMovies.layoutManager =
             LinearLayoutManager(view.context, RecyclerView.HORIZONTAL, false)
-        binding.rvTopRatedCrimeMovies.setHasFixedSize(true)
+        binding.rvTopRatedHorrorMovies.setHasFixedSize(true)
 
-        binding.rvTurkishCrimeMovies.layoutManager =
+        binding.rvTurkishHorrorMovies.layoutManager =
             LinearLayoutManager(view.context, RecyclerView.HORIZONTAL, false)
-        binding.rvTurkishCrimeMovies.setHasFixedSize(true)
+        binding.rvTurkishHorrorMovies.setHasFixedSize(true)
 
 
 
@@ -77,27 +80,27 @@ class CrimeMoviesFragment : Fragment(),MovieAdapter.OnItemClickListener {
     }
 
     private fun getBothMovieData() {
-        getPopularCrimeMovies { movies ->
-            binding.rvPopularCrimeMovies.adapter = MovieAdapter(movies.toMutableList(), this)
+        getPopularHorrorMovies { movies ->
+            binding.rvPopularHorrorMovies.adapter = MovieAdapter(movies.toMutableList(), this)
         }
-        getUpComingCrimeMovies { movies ->
-            binding.rvUpcomingCrimeMovies.adapter = MovieAdapter(movies.toMutableList(), this)
+        getUpComingHorrorMovies { movies ->
+            binding.rvUpcomingHorrorMovies.adapter = MovieAdapter(movies.toMutableList(), this)
         }
-        getTopRatedCrimeMovies { movies ->
-            binding.rvTopRatedCrimeMovies.adapter = MovieAdapter(movies.toMutableList(), this)
+        getTopRatedHorrorMovies { movies ->
+            binding.rvTopRatedHorrorMovies.adapter = MovieAdapter(movies.toMutableList(), this)
         }
-        getTurkishCrimeMovies { movies ->
-            binding.rvTurkishCrimeMovies.adapter = MovieAdapter(movies.toMutableList(), this)
+        getTurkishHorrorMovies { movies ->
+            binding.rvTurkishHorrorMovies.adapter = MovieAdapter(movies.toMutableList(), this)
         }
     }
 
 
 
 
-    private fun getPopularCrimeMovies(callback: (List<Movie>) -> Unit) {
+    private fun getPopularHorrorMovies(callback: (List<Movie>) -> Unit) {
         val apiService =
             MovieApiService.getInstance(requireContext()).create(MovieApiInterface::class.java)
-        apiService.getPopularCrimeMovies().enqueue(object : Callback<MovieResponse> {
+        apiService.getPopularHorrorMovies().enqueue(object : Callback<MovieResponse> {
             override fun onFailure(call: Call<MovieResponse>, t: Throwable) {}
             override fun onResponse(call: Call<MovieResponse>, response: Response<MovieResponse>) {
                 callback(response.body()!!.movies)
@@ -105,22 +108,10 @@ class CrimeMoviesFragment : Fragment(),MovieAdapter.OnItemClickListener {
         })
     }
 
-    private fun getTopRatedCrimeMovies(callback: (List<Movie>) -> Unit) {
+    private fun getTopRatedHorrorMovies(callback: (List<Movie>) -> Unit) {
         val apiService =
             MovieApiService.getInstance(requireContext()).create(MovieApiInterface::class.java)
-        apiService.getTopRatedCrimeMovies().enqueue(object : Callback<MovieResponse> {
-            override fun onResponse(call: Call<MovieResponse>, response: Response<MovieResponse>) {
-                callback(response.body()!!.movies)
-            }
-
-            override fun onFailure(call: Call<MovieResponse>, t: Throwable) {}
-        })
-    }
-
-    private fun getUpComingCrimeMovies(callback: (List<Movie>) -> Unit) {
-        val apiService =
-            MovieApiService.getInstance(requireContext()).create(MovieApiInterface::class.java)
-        apiService.getUpComingCrimeMovies().enqueue(object : Callback<MovieResponse> {
+        apiService.getTopRatedHorrorMovies().enqueue(object : Callback<MovieResponse> {
             override fun onResponse(call: Call<MovieResponse>, response: Response<MovieResponse>) {
                 callback(response.body()!!.movies)
             }
@@ -129,10 +120,22 @@ class CrimeMoviesFragment : Fragment(),MovieAdapter.OnItemClickListener {
         })
     }
 
-    private fun getTurkishCrimeMovies(callback: (List<Movie>) -> Unit) {
+    private fun getUpComingHorrorMovies(callback: (List<Movie>) -> Unit) {
         val apiService =
             MovieApiService.getInstance(requireContext()).create(MovieApiInterface::class.java)
-        apiService.getTurkishCrimeMovies().enqueue(object : Callback<MovieResponse> {
+        apiService.getUpComingHorrorMovies().enqueue(object : Callback<MovieResponse> {
+            override fun onResponse(call: Call<MovieResponse>, response: Response<MovieResponse>) {
+                callback(response.body()!!.movies)
+            }
+
+            override fun onFailure(call: Call<MovieResponse>, t: Throwable) {}
+        })
+    }
+
+    private fun getTurkishHorrorMovies(callback: (List<Movie>) -> Unit) {
+        val apiService =
+            MovieApiService.getInstance(requireContext()).create(MovieApiInterface::class.java)
+        apiService.getTurkishHorrorMovies().enqueue(object : Callback<MovieResponse> {
             override fun onResponse(call: Call<MovieResponse>, response: Response<MovieResponse>) {
                 callback(response.body()!!.movies)
             }

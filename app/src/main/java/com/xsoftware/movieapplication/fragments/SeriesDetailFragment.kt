@@ -1,4 +1,4 @@
-package com.xsoftware.movieapplication
+package com.xsoftware.movieapplication.fragments
 
 import android.os.Bundle
 import android.util.Log
@@ -8,13 +8,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
-import com.xsoftware.movieapplication.databinding.FragmentMovieDetailBinding
+import com.xsoftware.movieapplication.MainActivity
+import com.xsoftware.movieapplication.adapters.SeriesAdapter
+import com.xsoftware.movieapplication.adapters.SeriesCastAdapter
 import com.xsoftware.movieapplication.databinding.FragmentSeriesDetailBinding
-import com.xsoftware.movieapplication.models.MovieResponse
 import com.xsoftware.movieapplication.models.Series
 import com.xsoftware.movieapplication.models.SeriesCast
 import com.xsoftware.movieapplication.models.SeriesCastResponse
 import com.xsoftware.movieapplication.models.SeriesResponse
+import com.xsoftware.movieapplication.services.APIConstants
 import com.xsoftware.movieapplication.services.MovieApiInterface
 import com.xsoftware.movieapplication.services.MovieApiService
 import retrofit2.Call

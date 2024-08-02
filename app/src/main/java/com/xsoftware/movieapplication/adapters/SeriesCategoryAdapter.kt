@@ -1,4 +1,4 @@
-package com.xsoftware.movieapplication
+package com.xsoftware.movieapplication.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

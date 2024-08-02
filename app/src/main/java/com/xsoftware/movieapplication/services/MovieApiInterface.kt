@@ -1,6 +1,5 @@
 package com.xsoftware.movieapplication.services
 
-import com.xsoftware.movieapplication.APIConstants
 import com.xsoftware.movieapplication.models.GenreResponse
 import com.xsoftware.movieapplication.models.MovieCastResponse
 import com.xsoftware.movieapplication.models.MovieResponse
