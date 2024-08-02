@@ -1,6 +1,8 @@
 package com.xsoftware.movieapplication
 
 import android.os.Bundle
+import android.widget.Button
+import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
@@ -55,6 +57,14 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.popBackStack(null, androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE)
         supportFragmentManager.commit {
             setReorderingAllowed(true)
+            // Animasyonları tanımla
+            setCustomAnimations(
+                R.anim.slide_in_right,
+                R.anim.slide_out_left,
+                R.anim.slide_in_left,
+                R.anim.slide_out_right
+            )
+
             add<MainFragment>(R.id.fragmentContainerView)
             addToBackStack(null)
         }
@@ -64,6 +74,14 @@ class MainActivity : AppCompatActivity() {
     fun showCategoryMovie() {
         supportFragmentManager.commit {
             setReorderingAllowed(true)
+            // Animasyonları tanımla
+            setCustomAnimations(
+                R.anim.slide_in_right,
+                R.anim.slide_out_left,
+                R.anim.slide_in_left,
+                R.anim.slide_out_right
+            )
+
             replace<CategoryMovieFragment>(R.id.fragmentContainerView)
             addToBackStack(null) // Geri butonu ile geri dönüş sağlanabilir
         }
@@ -72,6 +90,14 @@ class MainActivity : AppCompatActivity() {
     fun showCategorySeries() {
         supportFragmentManager.commit {
             setReorderingAllowed(true)
+            // Animasyonları tanımla
+            setCustomAnimations(
+                R.anim.slide_in_right,
+                R.anim.slide_out_left,
+                R.anim.slide_in_left,
+                R.anim.slide_out_right
+            )
+
             replace<CategorySeriesFragment>(R.id.fragmentContainerView)
             addToBackStack(null) // Geri butonu ile geri dönüş sağlanabilir
         }
@@ -90,6 +116,14 @@ class MainActivity : AppCompatActivity() {
         val bundle = bundleOf("genreId" to genre.id, "genreName" to genre.name)
         supportFragmentManager.commit {
             setReorderingAllowed(true)
+            // Animasyonları tanımla
+            setCustomAnimations(
+                R.anim.slide_in_right,
+                R.anim.slide_out_left,
+                R.anim.slide_in_left,
+                R.anim.slide_out_right
+            )
+
             replace<MovieCategoryFragment>(R.id.fragmentContainerView, args = bundle)
             addToBackStack(null)
         }
@@ -118,6 +152,14 @@ class MainActivity : AppCompatActivity() {
     fun addMovieDetail(movie: Movie) {
         val bundle = bundleOf("movie" to movie)
         supportFragmentManager.commit {
+
+            setCustomAnimations(
+                R.anim.slide_in_right,
+                R.anim.slide_out_left,
+                R.anim.slide_in_left,
+                R.anim.slide_out_right
+            )
+
             replace<MovieDetailFragment>(R.id.fragmentContainerView, args = bundle)
             setReorderingAllowed(true)
             addToBackStack("movie_navigation_stack")
@@ -128,6 +170,14 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.popBackStack(null, androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE)
         supportFragmentManager.commit {
             setReorderingAllowed(true)
+            // Animasyonları tanımla
+            setCustomAnimations(
+                R.anim.slide_in_right,
+                R.anim.slide_out_left,
+                R.anim.slide_in_left,
+                R.anim.slide_out_right
+            )
+
             replace<SeriesFragment>(R.id.fragmentContainerView)
             addToBackStack(null)
         }
@@ -138,6 +188,14 @@ class MainActivity : AppCompatActivity() {
             putParcelable("series", series)
         }
         supportFragmentManager.commit {
+            // Animasyonları tanımla
+            setCustomAnimations(
+                R.anim.slide_in_right,
+                R.anim.slide_out_left,
+                R.anim.slide_in_left,
+                R.anim.slide_out_right
+            )
+
             replace<SeriesDetailFragment>(R.id.fragmentContainerView, args = bundle)
             setReorderingAllowed(true)
             addToBackStack(null)
@@ -246,17 +304,39 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    fun showCustomDialog() {
+        // AlertDialog.Builder kullanarak dialog oluşturma
+        val dialogView = layoutInflater.inflate(R.layout.layout_custom_dialog, null)
+
+        val dialog = AlertDialog.Builder(this)
+            .setView(dialogView)
+            .create()
+
+        // Dialogdaki butonları tanımlama
+        val btnYes = dialogView.findViewById<Button>(R.id.btnYes)
+        val btnNo = dialogView.findViewById<Button>(R.id.btnNo)
+        val tvMessage = dialogView.findViewById<TextView>(R.id.tvMessage)
+        tvMessage.text = "Are you sure you want to exit?"
+
+        // Yes butonuna tıklanıldığında
+        btnYes.setOnClickListener {
+            finish()  // Uygulamadan çık
+        }
+
+        // No butonuna tıklanıldığında
+        btnNo.setOnClickListener {
+            dialog.dismiss()  // Dialogu kapat
+        }
+
+        // Dialogu göster
+        dialog.show()
+    }
+
 
 
     override fun onBackPressed() {
         if (supportFragmentManager.backStackEntryCount == 1) {
-            AlertDialog.Builder(this)
-                .setTitle("Çıkış")
-                .setMessage("Çıkmak istiyor musunuz?")
-                .setPositiveButton("Evet") { _, _ -> finish() }
-                .setNegativeButton("İptal", null)
-                .create()
-                .show()
+            showCustomDialog()
         } else {
             super.onBackPressed()
         }
