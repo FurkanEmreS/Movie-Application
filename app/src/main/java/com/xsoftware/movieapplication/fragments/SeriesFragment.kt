@@ -7,8 +7,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.navigation.NavigationView
 import com.xsoftware.movieapplication.MainActivity
 import com.xsoftware.movieapplication.R
 import com.xsoftware.movieapplication.adapters.SeriesAdapter
@@ -24,6 +30,10 @@ import retrofit2.Callback
 class SeriesFragment : Fragment(), SeriesAdapter.OnItemClickListener {
 
     private lateinit var binding: FragmentSeriesBinding
+    private lateinit var drawerLayout: DrawerLayout
+    private lateinit var navView: NavigationView
+    private lateinit var actionBarDrawerToggle: ActionBarDrawerToggle
+    private lateinit var toolbar: Toolbar
 
     override fun onItemClick(series: Series) {
         Log.d("SERIES", series.name ?: "-")
@@ -40,6 +50,37 @@ class SeriesFragment : Fragment(), SeriesAdapter.OnItemClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        drawerLayout = binding.drawerLayout
+        navView = binding.navView
+        toolbar = view.findViewById(R.id.toolbar)
+
+        // Toolbar'ı ayarla
+        (activity as AppCompatActivity).setSupportActionBar(toolbar)
+
+        // ActionBarDrawerToggle'ı ayarla
+        actionBarDrawerToggle = ActionBarDrawerToggle(
+            activity, drawerLayout, toolbar,
+            R.string.drawer_open, R.string.drawer_close
+        )
+        drawerLayout.addDrawerListener(actionBarDrawerToggle)
+        actionBarDrawerToggle.syncState()
+
+        // Navigation view item seçimi dinleyicisini ayarla
+        navView.setNavigationItemSelectedListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.nav_movies -> {
+                    (activity as? MainActivity)?.showMainList()
+                }
+                R.id.nav_series -> {
+                    (activity as? MainActivity)?.showSeriesList()
+                }
+            }
+            drawerLayout.closeDrawer(GravityCompat.START)
+            true
+        }
+
+
+
 
         val backButton : ImageView = view.findViewById(R.id.back_button)
         backButton.visibility = View.GONE
