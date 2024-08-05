@@ -55,7 +55,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun showMainList() {
-        supportFragmentManager.popBackStack(null, androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE)
         supportFragmentManager.commit {
             setReorderingAllowed(true)
             // Animasyonları tanımla
@@ -66,15 +65,27 @@ class MainActivity : AppCompatActivity() {
                 R.anim.slide_out_right
             )
 
-            add<MainFragment>(R.id.fragmentContainerView)
-            addToBackStack(null)
+            replace<MainFragment>(R.id.fragmentContainerView)
+            addToBackStack(null) // Geri butonu ile geri dönüş sağlanabilir
         }
     }
 
     fun showHomeFragment() {
+        supportFragmentManager.popBackStack(
+            null,
+            androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE
+        )
         supportFragmentManager.commit {
-            replace<HomeFragment>(R.id.fragmentContainerView)
             setReorderingAllowed(true)
+            // Animasyonları tanımla
+            setCustomAnimations(
+                R.anim.slide_in_left,
+                R.anim.slide_out_right,
+                R.anim.slide_in_right,
+                R.anim.slide_out_left
+            )
+
+            add<HomeFragment>(R.id.fragmentContainerView)
             addToBackStack(null)
         }
     }
@@ -115,9 +126,15 @@ class MainActivity : AppCompatActivity() {
     fun showSeriesCategory(genre: Genre) {
         val bundle = bundleOf("genreId" to genre.id, "genreName" to genre.name)
         supportFragmentManager.commit {
+            // Animasyonları tanımla
+            setCustomAnimations(
+                R.anim.slide_in_right,
+                R.anim.slide_out_left,
+                R.anim.slide_in_left,
+                R.anim.slide_out_right
+            )
             setReorderingAllowed(true)
             replace<SeriesCategoryFragment>(R.id.fragmentContainerView, args = bundle)
-            addToBackStack(null)
         }
     }
 
@@ -134,7 +151,7 @@ class MainActivity : AppCompatActivity() {
             )
 
             replace<MovieCategoryFragment>(R.id.fragmentContainerView, args = bundle)
-            addToBackStack(null)
+
         }
     }
 

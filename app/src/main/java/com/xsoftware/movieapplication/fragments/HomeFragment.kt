@@ -33,51 +33,57 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         toolbar = view.findViewById(R.id.toolbar)
-        val categoriesButton : Button = view.findViewById(R.id.catagoriesButton)
+        val categoriesButton = view.findViewById<Button>(R.id.catagoriesButton)
+
+        // İlk açılışta Movies butonunu seçili yap
+        if (savedInstanceState == null) {
+            binding.segmentedGroup.check(R.id.btnMovies) // Movies butonunu seçili yap
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.fragmentContainer, MainFragment()) // İlk açılışta MoviesFragment göster
+                .commit()
+        }
 
         categoriesButton.setOnClickListener {
-            (activity as? MainActivity)?.showCategoryMovie()
+            // Seçili olan butonu kontrol et
+            when (binding.segmentedGroup.checkedButtonId) {
+                R.id.btnMovies -> {
+                    (activity as? MainActivity)?.showCategoryMovie()
+                }
+
+                R.id.btnSeries -> {
+                    (activity as? MainActivity)?.showCategorySeries()
+                }
+            }
         }
 
-
-
-        // İlk açılışta MoviesFragment göster
-        if (savedInstanceState == null) {
-            parentFragmentManager.beginTransaction()
-
-                .replace(R.id.fragmentContainer, MainFragment())
-                .commit()
-        }
-
-        // Movies button click listener
-        binding.btnMovies.setOnClickListener {
-            parentFragmentManager.beginTransaction(). setCustomAnimations(
-                R.anim.slide_in_right,
-                R.anim.slide_out_left,
-                R.anim.slide_in_left,
-                R.anim.slide_out_right
-            )
-
-
-
-
-                .replace(R.id.fragmentContainer, MainFragment())
-                .addToBackStack(null)
-                .commit()
-        }
-
-        // Series button click listener
-        binding.btnSeries.setOnClickListener {
-            parentFragmentManager.beginTransaction(). setCustomAnimations(
-                R.anim.slide_in_right,
-                R.anim.slide_out_left,
-                R.anim.slide_in_left,
-                R.anim.slide_out_right
-            )
-
-                .replace(R.id.fragmentContainer, SeriesFragment())
-                .addToBackStack(null)
-                .commit()
+        // Segmented button click listener
+        binding.segmentedGroup.addOnButtonCheckedListener { group, checkedId, isChecked ->
+            if (isChecked) {
+                when (checkedId) {
+                    R.id.btnMovies -> {
+                        parentFragmentManager.beginTransaction()
+                            .setCustomAnimations(
+                                R.anim.slide_in_left,
+                                R.anim.slide_out_right,
+                                R.anim.slide_in_right,
+                                R.anim.slide_out_left
+                            )
+                            .replace(R.id.fragmentContainer, MainFragment())
+                            .commit()
+                    }
+                    R.id.btnSeries -> {
+                        parentFragmentManager.beginTransaction()
+                            .setCustomAnimations(
+                                R.anim.slide_in_right,
+                                R.anim.slide_out_left,
+                                R.anim.slide_in_left,
+                                R.anim.slide_out_right
+                            )
+                            .replace(R.id.fragmentContainer, SeriesFragment())
+                            .commit()
+                    }
+                }
+            }
         }
     }
 }

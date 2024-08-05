@@ -6,8 +6,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.ProgressBar
+import android.widget.TextView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.xsoftware.movieapplication.MainActivity
@@ -30,7 +32,7 @@ class AllSeriesCategoryFragment : Fragment(), SeriesAdapter.OnItemClickListener 
     private lateinit var adapter: SeriesAdapter
     private var isLoading = false
     private var currentPage = 1
-    private val totalPage = 6
+    private val totalPage = 20
     private val seriesList = mutableListOf<Series>()
     private var layoutManagerState: Parcelable? = null
     private var genreId: Int = 0
@@ -97,6 +99,11 @@ class AllSeriesCategoryFragment : Fragment(), SeriesAdapter.OnItemClickListener 
                 }
             }
         })
+
+        val categoriesButton : Button = view.findViewById(R.id.catagoriesButton)
+        categoriesButton.visibility = View.GONE
+        val titleText : TextView = view.findViewById(R.id.toolbar_title)
+        titleText.text = "All Series"
     }
 
     override fun onSaveInstanceState(outState: Bundle) {

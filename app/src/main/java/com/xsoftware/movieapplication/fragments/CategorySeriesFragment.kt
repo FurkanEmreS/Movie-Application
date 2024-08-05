@@ -1,10 +1,14 @@
 package com.xsoftware.movieapplication.fragments
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.xsoftware.movieapplication.MainActivity
 import com.xsoftware.movieapplication.adapters.SeriesCategoryAdapter
@@ -16,10 +20,18 @@ import com.xsoftware.movieapplication.services.MovieApiService
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import androidx.appcompat.widget.Toolbar
+import com.xsoftware.movieapplication.R
 
 class CategorySeriesFragment : Fragment(), SeriesCategoryAdapter.OnItemClickListener {
 
     private lateinit var binding: FragmentCategorySeriesBinding
+    private lateinit var toolbar: Toolbar
+    private lateinit var titleText: TextView
+    private lateinit var backButton: ImageView
+    private lateinit var categoriesButton: Button
+    private lateinit var movieLogo: ImageView
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,6 +43,20 @@ class CategorySeriesFragment : Fragment(), SeriesCategoryAdapter.OnItemClickList
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        toolbar = view.findViewById(R.id.toolbar)
+        titleText = view.findViewById(R.id.toolbar_title)
+        titleText.text = "Categories"
+        backButton = view.findViewById(R.id.back_button)
+        backButton.setOnClickListener{
+            (activity as? MainActivity)?.showHomeFragment()
+        }
+
+        categoriesButton = view.findViewById(R.id.catagoriesButton)
+        categoriesButton.visibility = View.GONE
+        movieLogo = view.findViewById(R.id.iv_logo)
+        movieLogo.visibility = View.GONE
+
+
 
         // RecyclerView ayarları
         binding.categoryRecyclerView.layoutManager = LinearLayoutManager(view.context)

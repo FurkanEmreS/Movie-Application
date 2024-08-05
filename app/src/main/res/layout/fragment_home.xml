@@ -3,47 +3,60 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.HomeFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragments.HomeFragment"
+    android:backgroundTint="@color/white"
+    android:background="@color/white">
 
-    <!-- Vertical LinearLayout to hold buttons and FrameLayout -->
+    <!-- Vertical LinearLayout to hold toolbar and segmented buttons -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        >
+        android:orientation="vertical">
+
+        <!-- Toolbar Include -->
         <include
             android:id="@+id/toolbar"
             layout="@layout/toolbar" />
 
-
-        <!-- Horizontal LinearLayout for buttons -->
-        <LinearLayout
+        <!-- MaterialButtonToggleGroup for segmented buttons -->
+        <com.google.android.material.button.MaterialButtonToggleGroup
+            android:id="@+id/segmentedGroup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-
-
+            android:layout_margin="16dp"
+            app:singleSelection="true">
 
             <!-- Movies Button -->
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnMovies"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:backgroundTint="@color/black"
-
-                android:text="Movies" />
+                android:text="Movies"
+                app:backgroundTint="@color/button_background_color"
+                app:strokeColor="@color/black"
+                app:strokeWidth="1dp"
+                android:textColor="@color/button_text_color"
+                app:checkedIconTint="@null"
+                app:checkedIcon="@null" />
 
             <!-- Series Button -->
-            <Button
-                android:backgroundTint="@color/black"
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnSeries"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Series" />
-        </LinearLayout>
+                android:text="Series"
+                app:backgroundTint="@color/button_background_color"
+                app:strokeColor="@color/black"
+                app:strokeWidth="1dp"
+                android:textColor="@color/button_text_color"
+                app:checkedIconTint="@null"
+                app:checkedIcon="@null" />
+        </com.google.android.material.button.MaterialButtonToggleGroup>
 
         <!-- FrameLayout to hold fragment content -->
         <FrameLayout

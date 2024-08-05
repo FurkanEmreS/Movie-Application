@@ -5,7 +5,9 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -51,7 +53,7 @@ class SeriesCategoryFragment : Fragment(), SeriesAdapter.OnItemClickListener {
         toolbarImage.visibility = View.GONE
         val backButton : ImageView = view.findViewById(R.id.back_button)
         backButton.setOnClickListener{
-            (activity as? MainActivity)?.showSeriesList()
+            (activity as? MainActivity)?.showHomeFragment()
 
         }
 
@@ -74,11 +76,12 @@ class SeriesCategoryFragment : Fragment(), SeriesAdapter.OnItemClickListener {
 
         getSeriesData()
 
-        binding.catagoriesButton.setOnClickListener {
-            (activity as? MainActivity)?.showCategorySeries()
-        }
+        val categoriesButton :Button = view.findViewById(R.id.catagoriesButton)
+        categoriesButton.visibility = View.GONE
+        val titleText : TextView = view.findViewById(R.id.toolbar_title)
+        titleText.text = genreName + " Series"
 
-        binding.catagoriesButton.text = genreName
+
     }
 
     private fun getSeriesData() {

@@ -6,8 +6,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.ProgressBar
+import android.widget.TextView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.xsoftware.movieapplication.MainActivity
@@ -31,7 +33,7 @@ class AllMoviesCategoryFragment : Fragment(), MovieAdapter.OnItemClickListener {
     private lateinit var adapter: MovieAdapter
     private var isLoading = false
     private var currentPage = 1
-    private val totalPage = 6
+    private val totalPage = 20
     private val movieList = mutableListOf<Movie>()
     private var layoutManagerState: Parcelable? = null
     private var genreId: Int = 0
@@ -68,6 +70,7 @@ class AllMoviesCategoryFragment : Fragment(), MovieAdapter.OnItemClickListener {
             (activity as? MainActivity)?.popBackStack()
         }
 
+
         // Durum geri yükleme
         if (savedInstanceState != null) {
             currentPage = savedInstanceState.getInt("currentPage", 1)
@@ -96,6 +99,13 @@ class AllMoviesCategoryFragment : Fragment(), MovieAdapter.OnItemClickListener {
                 }
             }
         })
+
+        val categoriesButton : Button = view.findViewById(R.id.catagoriesButton)
+        categoriesButton.visibility = View.GONE
+        val tittleText = view.findViewById<TextView>(R.id.toolbar_title)
+        tittleText.text = "All Movies"
+
+
     }
 
     override fun onSaveInstanceState(outState: Bundle) {

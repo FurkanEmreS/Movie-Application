@@ -6,7 +6,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.xsoftware.movieapplication.MainActivity
@@ -51,7 +53,7 @@ class MovieCategoryFragment : Fragment(), MovieAdapter.OnItemClickListener {
         toolbarImage.visibility = View.GONE
         val backButton: ImageView = view.findViewById(R.id.back_button)
         backButton.setOnClickListener {
-            (activity as? MainActivity)?.showMainList()
+            (activity as? MainActivity)?.showHomeFragment()
         }
 
         binding.viewAllMoviesButton.setOnClickListener {
@@ -71,11 +73,12 @@ class MovieCategoryFragment : Fragment(), MovieAdapter.OnItemClickListener {
         binding.rvTurkishMovies.layoutManager = LinearLayoutManager(view.context, RecyclerView.HORIZONTAL, false)
         binding.rvTurkishMovies.setHasFixedSize(true)
 
-        binding.catagoriesButton.setOnClickListener {
-            (activity as? MainActivity)?.showCategoryMovie()
-        }
+        val categoriesButton : Button = view.findViewById(R.id.catagoriesButton)
+        categoriesButton.visibility = View.GONE
+        val titleText : TextView = view.findViewById(R.id.toolbar_title)
+        titleText.text = genreName + " Movies"
 
-        binding.catagoriesButton.text = genreName
+
 
         getMoviesData()
     }
