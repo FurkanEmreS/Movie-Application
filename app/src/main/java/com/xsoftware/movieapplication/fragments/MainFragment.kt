@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
@@ -30,10 +31,7 @@ import retrofit2.Response
 class MainFragment : Fragment(), MovieAdapter.OnItemClickListener {
 
     private lateinit var binding: FragmentMainBinding
-    private lateinit var drawerLayout: DrawerLayout
-    private lateinit var navView: NavigationView
-    private lateinit var actionBarDrawerToggle: ActionBarDrawerToggle
-    private lateinit var toolbar: Toolbar
+
     private var isLoading = false
     private var currentHorrorPage = 1
     private var totalHorrorPage = 5
@@ -61,42 +59,7 @@ class MainFragment : Fragment(), MovieAdapter.OnItemClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        drawerLayout = binding.drawerLayout
-        navView = binding.navView
-        toolbar = view.findViewById(R.id.toolbar)
-        val backButton :ImageView = view.findViewById(R.id.back_button)
-        backButton.visibility = View.GONE
 
-
-
-        // Toolbar'ı ayarla
-        (activity as AppCompatActivity).setSupportActionBar(toolbar)
-
-        // ActionBarDrawerToggle'ı ayarla
-        actionBarDrawerToggle = ActionBarDrawerToggle(
-            activity, drawerLayout, toolbar,
-            R.string.drawer_open, R.string.drawer_close
-        )
-        drawerLayout.addDrawerListener(actionBarDrawerToggle)
-        actionBarDrawerToggle.syncState()
-
-        // Navigation view item seçimi dinleyicisini ayarla
-        navView.setNavigationItemSelectedListener { menuItem ->
-            when (menuItem.itemId) {
-                R.id.nav_movies -> {
-                    (activity as? MainActivity)?.showMainList()
-                }
-                R.id.nav_series -> {
-                    (activity as? MainActivity)?.showSeriesList()
-                }
-            }
-            drawerLayout.closeDrawer(GravityCompat.START)
-            true
-        }
-
-        binding.catagoriesButton.setOnClickListener {
-            (activity as? MainActivity)?.showCategoryMovie()
-        }
 
         setupRecyclerViews()
         getBothMovieData()

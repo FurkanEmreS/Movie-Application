@@ -31,6 +31,16 @@
             android:layout_centerHorizontal="true"
             android:src="@drawable/movielogo3" />
 
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:backgroundTint="@color/white"
+            android:textColor="@color/black"
+            android:text="Catagories"
+            android:textSize="10sp"
+            android:id="@+id/catagoriesButton" />
+
 
     </RelativeLayout>
 </androidx.appcompat.widget.Toolbar>

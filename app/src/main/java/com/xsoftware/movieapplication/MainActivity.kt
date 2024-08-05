@@ -15,6 +15,7 @@ import com.xsoftware.movieapplication.fragments.AllMoviesCategoryFragment
 import com.xsoftware.movieapplication.fragments.AllSeriesCategoryFragment
 import com.xsoftware.movieapplication.fragments.CategoryMovieFragment
 import com.xsoftware.movieapplication.fragments.CategorySeriesFragment
+import com.xsoftware.movieapplication.fragments.HomeFragment
 import com.xsoftware.movieapplication.fragments.MainFragment
 import com.xsoftware.movieapplication.fragments.MovieCategoryFragment
 import com.xsoftware.movieapplication.fragments.MovieDetailFragment
@@ -45,7 +46,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         if (savedInstanceState == null) {
-            showMainList()
+            showHomeFragment()
         }
     }
 
@@ -66,6 +67,14 @@ class MainActivity : AppCompatActivity() {
             )
 
             add<MainFragment>(R.id.fragmentContainerView)
+            addToBackStack(null)
+        }
+    }
+
+    fun showHomeFragment() {
+        supportFragmentManager.commit {
+            replace<HomeFragment>(R.id.fragmentContainerView)
+            setReorderingAllowed(true)
             addToBackStack(null)
         }
     }
